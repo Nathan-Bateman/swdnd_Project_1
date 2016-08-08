@@ -1,0 +1,31 @@
+@import "variables";
+@media (min-width: 320px) {
+	/*.header-wrapper {
+		.header {
+			.face {
+				padding-left: 30px;
+			}
+			.hammy {
+				display: block;
+			}
+		}
+	}*/
+	
+}
+@media (min-width: 412px) {
+	.header-wrapper {
+		.header {
+			.face {
+				padding-left: 22%;
+			}
+			.hammy {
+				visibility: hidden !important;
+				display: block;
+			}
+			.header-wrapper .header .hammy #menu-num p {
+				visibility: hidden;
+			}
+		}
+	}
+	
+}

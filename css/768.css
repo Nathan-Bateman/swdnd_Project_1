@@ -1,0 +1,11 @@
+/*Colors*/
+/*Font*/
+@media (min-width: 768px) {
+  .header-wrapper .header .hammy {
+    padding-right: 30px; }
+  .sticky .header h3 {
+    display: block; } }
+
+@media (min-width: 767px) and (max-width: 835px) {
+  .sticky .header h3 {
+    margin-right: 0; } }
