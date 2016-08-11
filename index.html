@@ -102,7 +102,7 @@
     		<label>Employer
       			<input id='employer' type="text" placeholder="Empoloyer" autocomplete='password'>
     		</label>
-    		<input id='submit-account' type="submit" onclick='writeUser();'>
+    		<input id='submit-account' type="submit" onclick="handleSignUp()">
   		</form>
       </div>
       <div class="modal-footer">
@@ -115,4 +115,16 @@
 <!-- end signUp modal -->
 </body>
 <script src='js/final.min.js'></script>
+<script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD0yAGWbvp3i7TqcWyuq8Jr_82xrdBzd5I",
+    authDomain: "whereyewannameetapp.firebaseapp.com",
+    databaseURL: "https://whereyewannameetapp.firebaseio.com",
+    storageBucket: "whereyewannameetapp.appspot.com",
+  };
+  firebase.initializeApp(config);
+</script>
+
 </html>
