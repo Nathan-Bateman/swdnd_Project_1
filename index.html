@@ -91,13 +91,13 @@
       <div class="modal-body">
         <form>
 		   <label class='col-form-label'>Name
-    			<input class='col-sm-10' id="name" required type="text" placeholder="Name" autofocus>
+    			<input data-toggle="tooltip" data-trigger='manual' data-placement="top" title="Tooltip on top" class='col-sm-10' id="name" required type="text" placeholder="Name" autofocus onchange="checkName()">
     		</label>
     		<label>Email
-      			<input id='email-address' type="email" required placeholder="Email" autocomplete='street-address'>
+      			<input id='email-address' class='.form-control' type="email" required placeholder="Email" autocomplete='street-address'>
     		</label>
     		<label>Password
-      			<input id='password' type="password" required placeholder="Password" autocomplete='password' onchange="checkPassword()">
+      			<input id='password' type="password" required placeholder="Password" autocomplete='password'  onchange="checkPassword()">
     		</label>
     		<label>Confirm Password
       			<input id='password-confirm' type="password" required placeholder="Confirm Password" autocomplete='password' onchange="checkMatch(passWord,passWordConfirm)">
@@ -117,7 +117,7 @@
 </div>
 <!-- end signUp modal -->
 </body>
-<script src='js/final.min.js'></script>
+<script src='js/final.js'></script>
 <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
 <script>
   // Initialize Firebase

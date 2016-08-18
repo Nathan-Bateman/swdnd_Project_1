@@ -17,7 +17,7 @@ var gulp = require('gulp'),
 //Scripts Task
 //////////////// Grabs all .js files and pipes them out to a destination
 gulp.task('concatscripts', function(){
-	return gulp.src([ 'js/jQuery.js','js/tether.js','js/knockout-3.3.0.js','js/bootstrap.js' ,'js/main.js'])
+	return gulp.src([ 'js/jQuery.js','js/tether.js','js/knockout-3.3.0.js','js/bootstrap.js','validate.js','validate-methods.js','js/main.js'])
 	.pipe(plumber())
     .pipe(concat('final.js'))
 	.pipe(gulp.dest('js'))
@@ -44,7 +44,7 @@ gulp.task('watch', ['sass'], function() {
     //     server: "./"
     // });
     gulp.watch('js/**/*.js', ['concatscripts']);
-    gulp.watch('js/**/*final.js', ['uglifyscripts']);
+    // gulp.watch('js/**/*final.js', ['uglifyscripts']);
 	gulp.watch('scss/**/*.scss',['sass']);
 	gulp.watch('css/**/*.css', ['concatcss']);
 	gulp.watch('css/**/*.css', ['minifycss']);

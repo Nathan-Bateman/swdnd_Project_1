@@ -1,15 +1,6 @@
 console.log('works');
 console.log('works again');
 
-var checkBoxBilling = document.querySelector('#different-billing-checkbox');
-var cvvField = document.querySelector('#cvv');
-var expiryMonthField = document.querySelector('#expiry_month');
-var expiryYearField = document.querySelector('#expiry_year');
-var cardNumberField = document.querySelector('#card_number');
-var countryList = document.querySelector('#country_list');
-var zipField = document.querySelector('#zip');
-var stateField = document.querySelector('#state');
-
 //sign up field
 var emailField = document.querySelector('#email-address');
 var nameField = document.querySelector('#name');
@@ -30,7 +21,7 @@ var needUpper = 'the passwords must contain a uppercase letter ';
 var illegal = 'the passwords entered contains illegal characters ';
 var tooMany = 'the passwords must not contain more than 100 characters ';
 var tooFew = 'the passwords must contain at least 16 characters ';
-var needsValue = ''
+var needsValue = 'The name field is required and must have 3 or more alphabetical characters.';
 
 /*
 You might find you want to use RegEx. As this quiz is about setCustomValidity
@@ -44,6 +35,17 @@ match a character that isn't allowed in this password: /[^A-z0-9\!\@\#\$\%\^\&\*
  */
 //validate the name field - sign up
 var error = [];
+function checkName () {
+	var field = document.querySelector('#name').value;
+	if (field.length > 3 && isNaN(field) === true) {
+		$('#name').tooltip('hide');
+		console.log('good');
+	} else {
+		$('#name').tooltip('show');
+		error.push(needsValue);
+		console.log(needsValue);
+	}
+}
 function checkPassword () {
 	
 	if (passWord.value.match(/[\!\@\#\$\%\^\&\*]/g) === null) {
@@ -53,19 +55,24 @@ function checkPassword () {
 	}
 	if (passWord.value.match(/[a-z]/g) === null) {
 		error.push(needLower);
-		console.log(needLower);
+		// console.log(needLower);
 	}
 	if (passWord.value.match(/[A-Z]/g) === null) {
 		error.push(needUpper);
-		console.log(needUpper);
+		// console.log(needUpper);
 	}
 	if (passWord.value.match(/\d/g) === null) {
 		error.push(needNumber);
-		console.log(needNumber);
+		// console.log(needNumber);
 	}
 	if (error.length === 0) {
-		console.log(valid);
+		return 'valid';
 	}
+}
+function getLast (array) {
+	for (i= 0; array.length; i++) {
+		console.log(array[i]);
+	}	
 }
 
 function checkMatch (p1, p2) {
@@ -78,16 +85,22 @@ function checkMatch (p1, p2) {
 	} else {
 		console.log('match');
 	}
-		if (error != undefined) {
-		firstPass.setCustomValidity(error[0]);
-		secondPass.setCustomValidity(error[0]);
-		console.log(error);
+	if (error.length != 0) {
+		p1.setCustomValidity(error[0]);
+		p2.setCustomValidity(error[0]);
+		// console.log('error[0]');
 	} 
 	//TODO: Debug SetCustom Validity
-	if (error === undefined) {
-		firstPass.setCustomValidity('');
-	 	secondPass.setCustomValidity('');
-	 	// console.log(error);
+	if (error.length === 0) {
+		p1.setCustomValidity('');
+	  	p2.setCustomValidity('');
+	    console.log(error[2]);
 	}
 }
+//initialize tool tips
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+$('#name').tooltip('show');
 // Progress Bar Here
