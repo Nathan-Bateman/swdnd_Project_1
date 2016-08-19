@@ -23,17 +23,9 @@ var tooMany = 'the passwords must not contain more than 100 characters ';
 var tooFew = 'the passwords must contain at least 16 characters ';
 var needsValue = 'The name field is required and must have 3 or more alphabetical characters.';
 
-/*
-You might find you want to use RegEx. As this quiz is about setCustomValidity
-and not RegEx, here are some RegEx patterns you might find useful:
-
-match one of the required symbols: /[\!\@\#\$\%\^\&\*]/g
-match a number: /[0-9]/g or /\d/g
-match a lowercase letter: /[a-z]/g
-match an uppercase letter: /[A-Z]/g
-match a character that isn't allowed in this password: /[^A-z0-9\!\@\#\$\%\^\&\*]/g
- */
 //validate the name field - sign up
+
+//TODO: Must add custom messages for the form validation
 var error = [];
 function checkName () {
 	var field = document.querySelector('#name').value;
@@ -42,6 +34,18 @@ function checkName () {
 		console.log('good');
 	} else {
 		$('#name').tooltip('show');
+		error.push(needsValue);
+		console.log(needsValue);
+	}
+}
+function checkEmail () {
+	var field = document.querySelector('#email-address').value;
+	 var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	if (field.value.match(re)) {
+		$('#email-address').tooltip('hide');
+		console.log('good');
+	} else {
+		$('#email-address').tooltip('show');
 		error.push(needsValue);
 		console.log(needsValue);
 	}
@@ -102,5 +106,10 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
-$('#name').tooltip('show');
+$('#name').tooltip({
+    title: needsValue
+});
+$('#email-address').tooltip({
+    title: 'must be a valid email'
+});
 // Progress Bar Here
