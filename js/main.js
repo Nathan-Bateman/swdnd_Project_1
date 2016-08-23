@@ -52,46 +52,46 @@ function checkEmail () {
 //TODO: Fix logic for password validation
 function checkPassword () {
 	
-	if (passWord.value.match(/[\!\@\#\$\%\^\&\*]/g) === null) {
-		// firstPasswordInput.setCustomValidity('the passwords do not have the required symbol');
+	if (passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
+		$('#password-errors').empty('#symbols');
+	} 
+	if (!passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
 		$('#password').tooltip('show');
 		$('#password-errors').append(needSymbol);
 		error.push(needSymbol);
-		console.log(needSymbol);
-	} else {
-		$('#password-errors').empty('#symbols');
 	}
-	if (passWord.value.match(/[a-z]/g) === null) {
+	if (passWord.value.match(/[a-z]/g)) {
+		$('#password-errors').empty('#lowercase');
+	}
+	if (!passWord.value.match(/[a-z]/g)) {
 		$('#password').tooltip('show');
 		$('#password-errors').append(needLower);
 		//error.push(needLower);
 		// console.log(needLower);
-	} else {
-		$('#password-errors').empty('#lowercase');
-	}
-	if (passWord.value.match(/[A-Z]/g) === null) {
-		error.push(needUpper);
-		$('#password').tooltip('show');
-		$('#password-errors').append(needUpper);
-		// console.log(needUpper);
-	} else {
-		$('#password-errors').empty('#uppercase');
-	}
-	if (passWord.value.match(/\d/g) === null) {
-		error.push(needNumber);
-		$('#password').tooltip('show');
-		$('#password-errors').append(needNumber);
-		// console.log(needNumber);
-	} else {
-		$('#password-errors').empty('#number');
-	}
-	if (passWord.value.length < 8) {
-		error.push(tooFew);
-		$('#password').tooltip('show');
-		$('#password-errors').append(tooFew);
-	} else {
-		$('#password-errors').empty('#numchar');
-	}
+	} 
+	// if (passWord.value.match(/[A-Z]/g) === null) {
+	// 	error.push(needUpper);
+	// 	$('#password').tooltip('show');
+	// 	$('#password-errors').append(needUpper);
+	// 	// console.log(needUpper);
+	// } else {
+	// 	$('#password-errors').empty('#uppercase');
+	// }
+	// if (passWord.value.match(/\d/g) === null) {
+	// 	error.push(needNumber);
+	// 	$('#password').tooltip('show');
+	// 	$('#password-errors').append(needNumber);
+	// 	// console.log(needNumber);
+	// } else {
+	// 	$('#password-errors').empty('#number');
+	// }
+	// if (passWord.value.length < 8) {
+	// 	error.push(tooFew);
+	// 	$('#password').tooltip('show');
+	// 	$('#password-errors').append(tooFew);
+	// } else {
+	// 	$('#password-errors').empty('#numchar');
+	// }
 	if (error.length === 0) {
 		return 'valid';
 		$('#password').tooltip('hide');
