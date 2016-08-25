@@ -130,7 +130,7 @@ ACTIVE:".active",ACTIVE_CHILD:"> .nav-item > .active, > .active",DATA_TOGGLE:'[d
 
 console.log('bootstrap')
 console.log('works');
-
+console.log('agian');
 //sign up field
 var emailField = document.querySelector('#email-address');
 var nameField = document.querySelector('#name');
@@ -180,54 +180,36 @@ function checkEmail () {
 		console.log(needsValue);
 	}
 }
+// function showRequirements () {
+// 	$('#password').tooltip('show');
+
+// }
 //TODO: Fix logic for password validation
 function checkPassword () {
-	
-	if (passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
-		$('#password-errors').empty('#symbols');
-	} 
-	if (!passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
-		$('#password').tooltip('show');
-		$('#password-errors').append(needSymbol);
-		error.push(needSymbol);
-	}
-	if (passWord.value.match(/[a-z]/g)) {
-		$('#password-errors').empty('#lowercase');
-	}
-	if (!passWord.value.match(/[a-z]/g)) {
-		$('#password').tooltip('show');
-		$('#password-errors').append(needLower);
-		//error.push(needLower);
-		// console.log(needLower);
-	} 
-	// if (passWord.value.match(/[A-Z]/g) === null) {
-	// 	error.push(needUpper);
-	// 	$('#password').tooltip('show');
-	// 	$('#password-errors').append(needUpper);
-	// 	// console.log(needUpper);
-	// } else {
-	// 	$('#password-errors').empty('#uppercase');
-	// }
-	// if (passWord.value.match(/\d/g) === null) {
-	// 	error.push(needNumber);
-	// 	$('#password').tooltip('show');
-	// 	$('#password-errors').append(needNumber);
-	// 	// console.log(needNumber);
-	// } else {
-	// 	$('#password-errors').empty('#number');
-	// }
-	// if (passWord.value.length < 8) {
-	// 	error.push(tooFew);
-	// 	$('#password').tooltip('show');
-	// 	$('#password-errors').append(tooFew);
-	// } else {
-	// 	$('#password-errors').empty('#numchar');
-	// }
-	if (error.length === 0) {
-		return 'valid';
-		$('#password').tooltip('hide');
-
-	}
+	if ($('#password-errors').children().length >0) {
+			$('#password').tooltip('show');
+    	if (passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
+			$('#password-errors').children('#symbols').remove();
+		}
+		if (!passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
+			$('#password-errors').append(needSymbol);
+		}
+		if (passWord.value.match(/[a-z]/g)) {
+			$('#password-errors').children('#lowercase').remove();
+		}
+		if (passWord.value.match(/[A-Z]/g)) {
+	  	 	$('#password-errors').children('#uppercase').remove();
+	 	}
+	 	if (passWord.value.match(/\d/g)) {
+			$('#password-errors').children('#number').remove();
+		}
+		if (passWord.value.length >8) {
+			$('#password-errors').children('#numchar').remove();
+		}
+		if ($('#password-errors').children().length === 0) {
+				$('#password').tooltip('hide');
+		}
+	}  
 }
 function getLast (array) {
 	for (i= 0; array.length; i++) {
@@ -278,6 +260,6 @@ $('#email-address').tooltip({
 });
 $('#password').tooltip({
 	html: true,
-    title: '<ul id="password-errors"></ul>'
+    title: '<ul id="password-errors">'+ needSymbol + needUpper + needLower + needNumber + tooFew +'</ul>'
 });
 // Progress Bar Here
