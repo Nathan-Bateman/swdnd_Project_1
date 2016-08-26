@@ -24,6 +24,10 @@ var needsValue = 'The name field is required and must have 3 or more alphabetica
 
 
 var error = [];
+var active = [];
+function countFocus () {
+	active.push('count');
+}
 function checkName () {
 	var field = document.querySelector('#name').value;
 	if (field.length >= 3 && isNaN(field) === true) {
@@ -49,19 +53,16 @@ function checkEmail () {
 		console.log(needsValue);
 	}
 }
-// function showRequirements () {
-// 	$('#password').tooltip('show');
-
-// }
 //TODO: Fix logic for password validation
 function checkPassword () {
+	if (active.length > 0) {
+		$('#password-errors').append(needUpper);
+		$('#password').tooltip('show');
+	}
 	if ($('#password-errors').children().length >0) {
 			$('#password').tooltip('show');
     	if (passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
 			$('#password-errors').children('#symbols').remove();
-		}
-		if (!passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
-			$('#password-errors').append(needSymbol);
 		}
 		if (passWord.value.match(/[a-z]/g)) {
 			$('#password-errors').children('#lowercase').remove();
@@ -72,7 +73,7 @@ function checkPassword () {
 	 	if (passWord.value.match(/\d/g)) {
 			$('#password-errors').children('#number').remove();
 		}
-		if (passWord.value.length >8) {
+		if (passWord.value.length >7) {
 			$('#password-errors').children('#numchar').remove();
 		}
 		if ($('#password-errors').children().length === 0) {
