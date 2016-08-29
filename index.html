@@ -15,9 +15,12 @@
 <div id='container' class="container-fluid">
   	<div class='row header-wrapper'>
     	<div id='big-wrap-head'>
-    		<div class='col-sm-12 header'>
+    		<div class='col-sm-8 header'>
         		<h1>Where yewanna meet app</h1>
     		</div>
+        <div class='col-sm-4 header'>
+            <h5 id='status'>You are logged in</h5>
+        </div>
   		</div>
   	</div>	
  <!-- End Header Section -->
@@ -100,7 +103,7 @@
       			<input id='password' type="password" data-toggle="tooltip" data-trigger='manual' data-animation='true'data-placement="left" required placeholder="Password" autocomplete='password' onfocus='countFocus()'onkeyup="checkPassword()">
     		</label>
     		<label>Confirm Password
-      			<input id='password-confirm' type="password" required placeholder="Confirm Password" autocomplete='password' onchange="checkMatch(passWord,passWordConfirm)">
+      			<input id='password-confirm' type="password" data-trigger='manual' required placeholder="Confirm Password" autocomplete='password' onkeyup="checkMatch(passWord,passWordConfirm)">
     		</label>
     		<label>Employer
       			<input id='employer' type="text" placeholder="Empoloyer" autocomplete='password'>

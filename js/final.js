@@ -212,11 +212,7 @@ function checkPassword () {
 		}
 	}  
 }
-function getLast (array) {
-	for (i= 0; array.length; i++) {
-		console.log(array[i]);
-	}	
-}
+
 //stop tooltips from showing on modal close
 $('#signUp').on('hidden.bs.modal', function () {
     $('[data-toggle="tooltip"]').tooltip('hide');
@@ -226,26 +222,29 @@ $('#signUp').on('show.bs.modal', function () {
 })
 
 function checkMatch (p1, p2) {
+
 	var firstPass = p1.value;
 	var secondPass = p2.value;
 
 	if (firstPass != secondPass) {
 		error.push(missMatch);
+		$('#password-confirm').tooltip('show');
 		console.log(missMatch);
 	} else {
+		$('#password-confirm').tooltip('hide');
 		console.log('match');
 	}
-	if (error.length != 0) {
-		p1.setCustomValidity(error[0]);
-		p2.setCustomValidity(error[0]);
-		// console.log('error[0]');
-	} 
-	//TODO: Debug SetCustom Validity
-	if (error.length === 0) {
-		p1.setCustomValidity('');
-	  	p2.setCustomValidity('');
-	    console.log(error[2]);
-	}
+	// if (error.length != 0) {
+	// 	p1.setCustomValidity(error[0]);
+	// 	p2.setCustomValidity(error[0]);
+	// 	// console.log('error[0]');
+	// } 
+	// //TODO: Debug SetCustom Validity
+	// if (error.length === 0) {
+	// 	p1.setCustomValidity('');
+	//   	p2.setCustomValidity('');
+	//     console.log(error[2]);
+	// }
 }
 //initialize tool tips
 $(function () {
@@ -262,5 +261,9 @@ $('#email-address').tooltip({
 $('#password').tooltip({
 	html: true,
     title: '<ul id="password-errors">'+ needSymbol + needUpper + needLower + needNumber + tooFew +'</ul>'
+});
+$('#password-confirm').tooltip({
+	html: true,
+    title: missMatch
 });
 // Progress Bar Here
