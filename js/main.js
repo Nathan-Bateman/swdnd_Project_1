@@ -1,17 +1,17 @@
-console.log('works');
-console.log('agian');
 //sign up field
-var emailField = document.querySelector('#email-address');
-var nameField = document.querySelector('#name');
+var emailField = $('#email-address');
+var nameField = $('#name');
 var passWord = document.querySelector('#password');
 var passWordConfirm = document.querySelector('#password-confirm');
-var employer = document.querySelector('#employer');
-var submitAccount = document.querySelector('#submit-account');
+var employer = $('#employer');
+var submitAccount = $('#submit-account');
+var signUp = $('#signUp');
 
 var steps = 0;
 var startWidth = 0;
 
 //error messages
+var passWordErrors = $('#password-errors');
 var missMatch = '<li>the passwords do not match</li>';
 var needSymbol = '<li id="symbols">needs on of these: !,@,#,$,%,^,&,*</li>';
 var needNumber = '<li id="number">needs a number</li>';
@@ -21,9 +21,8 @@ var tooFew = '<li id="numchar">need a least 8 characters</li>';
 var needsValue = 'The name field is required and must have 3 or more alphabetical characters.';
 
 //validate the name field - sign up
-
-
 var error = [];
+//array to log the # of times the password field
 var active = [];
 function countFocus () {
 	active.push('count');
@@ -31,35 +30,28 @@ function countFocus () {
 function checkName () {
 	var field = document.querySelector('#name').value;
 	if (field.length >= 3 && isNaN(field) === true) {
-		$('#name').tooltip('hide');
-		console.log('good');
+		nameField.tooltip('hide');
 	} else {
-		$('#name').tooltip('show');
-		error.push(needsValue);
-		console.log(needsValue);
+		nameField.tooltip('show');
 	}
 }
 //TODO: Get email form validation to work
 function checkEmail () {
 	var field = document.querySelector('#email-address').value;
-	var emailPattern = document.querySelector('#email-address').getAttribute('pattern');
 	if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(field))
 	 {
-		$('#email-address').tooltip('hide');
-		console.log('good');
+		emailField.tooltip('hide');
 	} else {
-		$('#email-address').tooltip('show');
-		error.push(needsValue);
-		console.log(needsValue);
+		emailField.tooltip('show');
 	}
 }
 //TODO: Fix logic for password validation
 function checkPassword () {
 	if (active.length > 0) {
-		$('#password-errors').append(needUpper);
+		passWordErrors.append(needUpper);
 		$('#password').tooltip('show');
 	}
-	if ($('#password-errors').children().length >0) {
+	if (passWordErrors.children().length >0) {
 			$('#password').tooltip('show');
     	if (passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
 			$('#password-errors').children('#symbols').remove();
@@ -81,12 +73,11 @@ function checkPassword () {
 		}
 	}  
 }
-
 //stop tooltips from showing on modal close
-$('#signUp').on('hidden.bs.modal', function () {
+signUp.on('hidden.bs.modal', function () {
     $('[data-toggle="tooltip"]').tooltip('hide');
 })
-$('#signUp').on('show.bs.modal', function () {
+signUp.on('show.bs.modal', function () {
     $('[data-toggle="tooltip"]').tooltip('show');
 })
 
@@ -97,34 +88,23 @@ function checkMatch (p1, p2) {
 
 	if (firstPass != secondPass) {
 		error.push(missMatch);
-		$('#password-confirm').tooltip('show');
+		passWordConfirm.tooltip('show');
 		console.log(missMatch);
 	} else {
-		$('#password-confirm').tooltip('hide');
+		passWordConfirm.tooltip('hide');
 		console.log('match');
 	}
-	// if (error.length != 0) {
-	// 	p1.setCustomValidity(error[0]);
-	// 	p2.setCustomValidity(error[0]);
-	// 	// console.log('error[0]');
-	// } 
-	// //TODO: Debug SetCustom Validity
-	// if (error.length === 0) {
-	// 	p1.setCustomValidity('');
-	//   	p2.setCustomValidity('');
-	//     console.log(error[2]);
-	// }
 }
 //initialize tool tips
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
-$('#name').tooltip({
+nameField.tooltip({
     title: needsValue,
     effect: 'toggle'
 });
-$('#email-address').tooltip({
+emailField.tooltip({
     title: 'must be a valid email'
 });
 $('#password').tooltip({
