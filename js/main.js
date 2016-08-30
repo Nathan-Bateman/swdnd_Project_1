@@ -51,25 +51,31 @@ function checkPassword () {
 		passWordErrors.append(needUpper);
 		$('#password').tooltip('show');
 	}
-	if (passWordErrors.children().length >0) {
+	if ($('#password-errors').children().length >0) {
 			$('#password').tooltip('show');
+			// console.log('has children');
     	if (passWord.value.match(/[\!\@\#\$\%\^\&\*]/g)) {
 			$('#password-errors').children('#symbols').remove();
 		}
 		if (passWord.value.match(/[a-z]/g)) {
 			$('#password-errors').children('#lowercase').remove();
+			// console.log('remove lowercase');
 		}
 		if (passWord.value.match(/[A-Z]/g)) {
 	  	 	$('#password-errors').children('#uppercase').remove();
+	  	 	// console.log('remove uppercase');
 	 	}
 	 	if (passWord.value.match(/\d/g)) {
 			$('#password-errors').children('#number').remove();
+			// console.log('remove number');
 		}
 		if (passWord.value.length >7) {
 			$('#password-errors').children('#numchar').remove();
+			// console.log('remove number of characters');
 		}
 		if ($('#password-errors').children().length === 0) {
 				$('#password').tooltip('hide');
+				// console.log('hide the tootip');
 		}
 	}  
 }
@@ -85,13 +91,15 @@ function checkMatch (p1, p2) {
 
 	var firstPass = p1.value;
 	var secondPass = p2.value;
+	// console.log(firstPass);
+	console.log(secondPass);
 
 	if (firstPass != secondPass) {
 		error.push(missMatch);
-		passWordConfirm.tooltip('show');
+		$('#password-confirm').tooltip('show');
 		console.log(missMatch);
 	} else {
-		passWordConfirm.tooltip('hide');
+		$('#password-confirm').tooltip('hide');
 		console.log('match');
 	}
 }
