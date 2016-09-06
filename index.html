@@ -27,7 +27,7 @@
   	<div id='summary-section' class='row'>
 	    <div id='big-summary-wrap'>
 	    	<div class='col-sm-12'>
-	      		<button type='button' class="btn btn-primary btn-lg" data-toggle="modal" data-target="#createEvent" data-toggle="modal">Create Event</button>
+	      		<button type='button' class="btn btn-primary btn-lg" data-toggle="modal" data-target="#create-event" data-toggle="modal">Create Event</button>
 	      		<button type='button' class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signUp" data-toggle="modal">Sign Up</button>
 	    	</div>
 	    	
@@ -54,7 +54,7 @@
   <!-- End footer section -->
   </div>
 </div>
-<div class="modal fade" id="createEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="create-event" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -66,11 +66,37 @@
       <div class="modal-body">
           <form>
 		    <label>
-			      <input id="first" type="text" placeholder="New password" maxlength="100" autofocus required>
+			      <input id="event-name" type="text" placeholder="Event Name" maxlength="100" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" autofocus required onchange="checkEventName()">
 			    </label>
-			    <label>
-			      <input id="second" type="password" placeholder="Repeat password" maxlength="100" required>
-			    </label>
+          <label>
+            <input id="event-type" list='eventnames' placeholder="Event type" required>
+                  <datalist id="eventnames">
+                    <option value="Lunch">
+                    <option value="Dinner">
+                    <option value="Breakfast">
+                    <option value="Prayer">
+                    <option value="Dove Shoot">
+                    <option value="Spouse Date">
+                  </datalist>
+        </label>
+          <label>
+            <input id="event-host" type="text" placeholder="Event host" maxlength="100"  data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" required onchange="checkEventHost()">
+          </label>
+          <label>
+            <input id="event-start" type="password" placeholder="Start time" maxlength="100" required>
+          </label>
+          <label>
+            <input id="event-end" type="password" placeholder="End time" maxlength="100" required>
+          </label>
+          <label>
+            <input id="event-guest" type="password" placeholder="Guest List" maxlength="100" required>
+          </label>
+          <label>
+            <input id="event-location" type="password" placeholder="Event Location" maxlength="100" required>
+          </label>
+          <label>
+            <input id="event-info" type="password" placeholder="Additional Information" maxlength="100">
+          </label>
 			    <input id="submit" type="submit">
   			</form>
       </div>
@@ -92,7 +118,7 @@
         <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="index.html">
 		   <label class='col-form-label'>Name
     			<input data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='col-sm-10' id="name" required type="text" placeholder="Name" autofocus onchange="checkName()">
     		</label>

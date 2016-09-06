@@ -1,3 +1,6 @@
+//login status
+var status = document.querySelector('#status');
+
 //sign up fields
 var emailField = $('#email-address');
 var nameField = $('#name');
@@ -6,6 +9,16 @@ var passWordConfirm = document.querySelector('#password-confirm');
 var employer = $('#employer');
 var submitAccount = document.querySelector('#submit-account');
 var signUp = $('#signUp');
+//create event fields
+var eventName = $('#event-name');
+var eventType = $('#event-type');
+var eventHost = $('#event-host');
+var eventStart = $('#event-start');
+var eventEnd = $('#event-end');
+var eventGuest = $('#event-guest');
+var eventLocation = $('#event-location');
+var eventInfo = $('#event-info');
+var createEvent = $('#create-event');
 
 //progress bar
 var steps = 0;
@@ -19,7 +32,7 @@ var needNumber = '<li id="number">needs a number</li>';
 var needLower = '<li id="lowercase">needs a lowercase letter</li>';
 var needUpper = '<li id="uppercase">need an uppercase letter</li>';
 var tooFew = '<li id="numchar">need a least 8 characters</li>';
-var needsValue = 'The name field is required and must have 3 or more alphabetical characters.';
+var needsValue = 'This field is required and must have 3 or more alphabetical characters.';
 
 //validate the name field - sign up
 var error = [];
@@ -89,22 +102,36 @@ function checkMatch (p1, p2) {
 	}
 }
 //Test validation and create an account
-//TODO: make the submit button not submit when the passwords do not match
-// submitAccount.addEventListener("click", function(event){
-//     		event.preventDefault();
-// 		});
+//TODO: make status ID retain name value after submission and make sign up button disappear
 function createAccount() {
 	if (passWord.value === passWordConfirm.value && $('#password-errors').children().length === 0) {
-		console.log('valid');
+		document.querySelector('#status').innerHTML= 'nameField';
 	} else {
 		return false;
+	}
+}
+//Create Event Validation
+function checkEventName () {
+	var field = document.querySelector('#event-name').value;
+	if (field.length >= 3 && isNaN(field) === true) {
+		eventName.tooltip('hide');
+	} else {
+		eventName.tooltip('show');
+	}
+}
+function checkEventHost () {
+	var field = document.querySelector('#event-host').value;
+	if (field.length >= 3 && isNaN(field) === true) {
+		eventHost.tooltip('hide');
+	} else {
+		eventHost.tooltip('show');
 	}
 }
 //Tooltips section - initialize tool tips
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
-
+//create account tooltips options
 nameField.tooltip({
     title: needsValue,
     effect: 'toggle'
@@ -123,12 +150,26 @@ $('#password-confirm').tooltip({
 	html: true,
     title: missMatch
 });
-
+//create event tooltips
+eventName.tooltip({
+	title: needsValue,
+	effect: 'toggle'
+});
+eventHost.tooltip({
+	title: needsValue,
+	effect: 'toggle'
+});
 //Stop tooltips from showing on modal close
 signUp.on('hidden.bs.modal', function () {
     $('[data-toggle="tooltip"]').tooltip('hide');
 })
 signUp.on('show.bs.modal', function () {
+    $('[data-toggle="tooltip"]').tooltip('show');
+})
+createEvent.on('hidden.bs.modal', function () {
+    $('[data-toggle="tooltip"]').tooltip('hide');
+})
+createEvent.on('show.bs.modal', function () {
     $('[data-toggle="tooltip"]').tooltip('show');
 })
 // Progress Bar Here
