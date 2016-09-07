@@ -83,10 +83,10 @@
             <input id="event-host" type="text" placeholder="Event host" maxlength="100"  data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" required onchange="checkEventHost()">
           </label>
           <label>
-            <input id="event-start" type="password" placeholder="Start time" maxlength="100" required>
+            <input id="event-start" type="datetime-local" placeholder="Start time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="checkStartDate()">
           </label>
           <label>
-            <input id="event-end" type="password" placeholder="End time" maxlength="100" required>
+            <input id="event-end" type="datetime-local" placeholder="End time" maxlength="100" required>
           </label>
           <label>
             <input id="event-guest" type="password" placeholder="Guest List" maxlength="100" required>

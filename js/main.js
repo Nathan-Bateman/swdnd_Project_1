@@ -33,6 +33,7 @@ var needLower = '<li id="lowercase">needs a lowercase letter</li>';
 var needUpper = '<li id="uppercase">need an uppercase letter</li>';
 var tooFew = '<li id="numchar">need a least 8 characters</li>';
 var needsValue = 'This field is required and must have 3 or more alphabetical characters.';
+var future = 'Time must be in the future';
 
 //validate the name field - sign up
 var error = [];
@@ -127,6 +128,16 @@ function checkEventHost () {
 		eventHost.tooltip('show');
 	}
 }
+function checkStartDate () {
+	var startField  = document.querySelector('#event-start').value;
+	console.log(startField);
+	var now = Date.now();
+	// if(now >= startField) {
+	// 	eventStart.tooltip('show');
+	// } else {
+	// 	eventStart.tooltip('hide');
+	// }
+}
 //Tooltips section - initialize tool tips
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
@@ -157,6 +168,10 @@ eventName.tooltip({
 });
 eventHost.tooltip({
 	title: needsValue,
+	effect: 'toggle'
+});
+eventStart.tooltip({
+	title: future,
 	effect: 'toggle'
 });
 //Stop tooltips from showing on modal close
