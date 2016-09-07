@@ -129,14 +129,13 @@ function checkEventHost () {
 	}
 }
 function checkStartDate () {
-	var startField  = document.querySelector('#event-start').value;
-	console.log(startField);
+	var startField  = Date.parse(document.querySelector('#event-start').value);
 	var now = Date.now();
-	// if(now >= startField) {
-	// 	eventStart.tooltip('show');
-	// } else {
-	// 	eventStart.tooltip('hide');
-	// }
+	if(now >= startField) {
+		eventStart.tooltip('show');
+	} else {
+		eventStart.tooltip('hide');
+	}
 }
 //Tooltips section - initialize tool tips
 $(function () {
