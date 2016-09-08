@@ -128,13 +128,20 @@ function checkEventHost () {
 		eventHost.tooltip('show');
 	}
 }
+//TODO: take into account the time of the event and not just the date to compare
 function checkStartDate () {
-	var startField  = Date.parse(document.querySelector('#event-start').value);
+	var startField  = new Date(document.querySelector('#event-start').value);
+	var localTime = startField.getTimezoneOffset();
+	var localTime = localTime * 60000;
+	var startField = Date.parse(startField);
+	var startField = startField + localTime;
 	var now = Date.now();
 	if(now >= startField) {
 		eventStart.tooltip('show');
+		console.log('show it');
 	} else {
 		eventStart.tooltip('hide');
+		console.log('hide it');
 	}
 }
 //Tooltips section - initialize tool tips
