@@ -33,7 +33,8 @@ var needLower = '<li id="lowercase">needs a lowercase letter</li>';
 var needUpper = '<li id="uppercase">need an uppercase letter</li>';
 var tooFew = '<li id="numchar">need a least 8 characters</li>';
 var needsValue = 'This field is required and must have 3 or more alphabetical characters.';
-var future = 'Time must be in the future';
+var future = 'Date must be in the future';
+var afterStart = 'Date must be after the start date';
 
 //validate the name field - sign up
 var error = [];
@@ -128,17 +129,28 @@ function checkEventHost () {
 		eventHost.tooltip('show');
 	}
 }
-//TODO: add end date comparison
-function checkStartDate () {
-	var startField  = new Date(document.querySelector('#event-start').value);
-	var localTime = startField.getTimezoneOffset() * 60000;
-	var startField = Date.parse(startField) + localTime;
+//check that the start date is in the future
+function checkDate () {
+	var startField = document.querySelector('#event-start').value;
+	var startDate  = new Date(startField);
+	var localTime = startDate.getTimezoneOffset() * 60000;
+	var startDate = Date.parse(startDate) + localTime;
 	var now = Date.now();
-	if(now >= startField) {
+	if(now >= startDate) {
 		eventStart.tooltip('show');
 	} else {
 		eventStart.tooltip('hide');
 	}
+}
+//Compare the end and start dates to confirm the end date is after the start date
+function compareDates () {
+	var startDate = new Date(document.querySelector('#event-start').value);
+	var endDate = new Date(document.querySelector('#event-end').value);
+		if (startDate >= endDate) {
+			eventEnd.tooltip('show');
+		} else {
+			eventEnd.tooltip('hide');
+		}
 }
 //Tooltips section - initialize tool tips
 $(function () {
@@ -174,6 +186,10 @@ eventHost.tooltip({
 });
 eventStart.tooltip({
 	title: future,
+	effect: 'toggle'
+});
+eventEnd.tooltip({
+	title: afterStart,
 	effect: 'toggle'
 });
 //Stop tooltips from showing on modal close
