@@ -34,19 +34,20 @@
 	  	</div>
   	</div>
     <!-- End Summary Section -->
-
+<hr>
   	<div id='skills' class='row'>
 	      <div class='col-sm-12'>
 	        <h2>Events Go Here</h2>
 	      </div>
   	</div>  
-
+<hr>
     <!-- End Events Section -->
   	<div id='footer'>
     	<div class='row'>
       		<div id='big-footer-wrap'>
 		      <div class='col-sm-12 social'>
-		      <a href="https://www.linkedin.com/in/nbatemanjr">Assembled by Nathan Bateman</a>
+            <span>Assembles by:</span>
+		      <a href="https://www.linkedin.com/in/nbatemanjr">Nathan Bateman</a>
 		      </div>
       		</div>
     	</div>
@@ -64,7 +65,7 @@
         <h4 class="modal-title" id="myModalLabel">Create Event</h4>
       </div>
       <div class="modal-body">
-          <form>
+          <form action="index.html">
 		    <label>
 			      <input id="event-name" type="text" placeholder="Event Name" maxlength="100" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" autofocus required onchange="checkEventName()">
 			    </label>
@@ -88,16 +89,16 @@
           <label>
             <input id="event-end" type="datetime-local" placeholder="End time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="compareDates()">
           </label>
-          <label>
-            <input id="event-guest" type="password" placeholder="Guest List" maxlength="100" required>
+         <label>
+            <input id="event-location" type="text" placeholder="Event Location" maxlength="100" required onfocus="geolocate()">
           </label>
           <label>
-            <input id="event-location" type="password" placeholder="Event Location" maxlength="100" required>
+            <textarea id="event-guest" type="text" cols="20" rows="1" data-toggle="tooltip" data-trigger='manual'data-animation='true' data-placement='top' maxlength="100" required onchange="checkGuests()" placeholder="Guest List"></textarea>
           </label>
           <label>
-            <input id="event-info" type="password" placeholder="Additional Information" maxlength="100">
+            <textarea id="event-info" type="text" cols="20" rows="1" placeholder="Additional Information" maxlength="100"></textarea>
           </label>
-			    <input id="submit" type="submit">
+			    <input id="submit-event" type="submit" onclick="return createMeeting()">
   			</form>
       </div>
       <div class="modal-footer">
@@ -134,7 +135,8 @@
     		<label>Employer
       			<input id='employer' type="text" placeholder="Employer" autocomplete='password'>
     		</label>
-    		<input id='submit-account' type="submit" onclick="return createAccount()">
+    		<button id='submit-account' type="button" onclick="return createAccount()">Create Account</button>
+
   		</form>
       </div>
       <div class="modal-footer">
@@ -146,7 +148,6 @@
 </div>
 <!-- end signUp modal -->
 </body>
-<script src='js/final.js'></script>
 <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
 <script>
   // Initialize Firebase
@@ -158,5 +159,8 @@
   };
   firebase.initializeApp(config);
 </script>
+<script src='js/final.js'></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf6eVqBHHikDBUwt_U_WBJRgNoqjdmSiM&libraries=places&callback=initAutocomplete" async defer></script>
+
 
 </html>

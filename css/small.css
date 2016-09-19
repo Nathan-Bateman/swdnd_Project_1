@@ -1,0 +1,35 @@
+/*Colors*/
+/*Font*/
+/*Global Headers*/
+h1 {
+  font-size: 34px;
+  font-family: "lato", sans-serif; }
+
+h2 {
+  font-size: 28px;
+  font-family: "lato", sans-serif; }
+
+h3 {
+  font-size: 24px;
+  font-family: "lato", sans-serif;
+  font-weight: 100; }
+
+h4 {
+  font-size: 22px;
+  font-family: "lato", sans-serif; }
+
+h5 {
+  font-size: 20px;
+  font-family: "lato", sans-serif; }
+
+h6 {
+  font-size: 18px;
+  font-family: "lato", sans-serif; }
+
+p {
+  font-size: 16px;
+  font-family: "lato", sans-serif;
+  font-weight: 300; }
+
+.pac-container {
+  z-index: 1051 !important; }

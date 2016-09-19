@@ -1,6 +1,7 @@
 {
   "projects": {
     "default": "whereyewannameetapp",
-    "whereyewannameetapp": "whereyewannameetapp"
+    "whereyewannameetapp": "whereyewannameetapp",
+    "p1": "whereyewannameetapp"
   }
 }

@@ -131,7 +131,9 @@ ACTIVE:".active",ACTIVE_CHILD:"> .nav-item > .active, > .active",DATA_TOGGLE:'[d
 console.log('bootstrap')
 //login status
 var status = document.querySelector('#status');
-
+const userEmail = document.getElementById('email-address');
+const userPassword = document.getElementById('password');
+const createUser = document.getElementById('submit-account');
 //sign up fields
 var emailField = $('#email-address');
 var nameField = $('#name');
@@ -149,8 +151,8 @@ var eventEnd = $('#event-end');
 var eventGuest = $('#event-guest');
 var eventLocation = $('#event-location');
 var eventInfo = $('#event-info');
+var submitEvent = document.querySelector('#submit-event');
 var createEvent = $('#create-event');
-
 //progress bar
 var steps = 0;
 var startWidth = 0;
@@ -169,6 +171,7 @@ var afterStart = 'Date must be after the start date';
 
 //validate the name field - sign up
 var error = [];
+
 //array to log the # of times the password field
 var active = [];
 //check the number of times a field has been active
@@ -237,51 +240,116 @@ function checkMatch (p1, p2) {
 //Test validation and create an account
 //TODO: make status ID retain name value after submission and make sign up button disappear
 function createAccount() {
-	if (passWord.value === passWordConfirm.value && $('#password-errors').children().length === 0) {
+	if (passWord.value === passWordConfirm.value && $('#password-errors').children().length === 0 && document.querySelector('#name').value.length >= 3 ) {
 		document.querySelector('#status').innerHTML= 'nameField';
 	} else {
 		return false;
 	}
 }
 //Create Event Validation
+function removeError (errormessage) {
+	var index = error.indexOf(errormessage);
+	console.log(index);
+	if (index != -1) {
+		error.splice(index,1);
+	}
+}
+
+function addError (errormessage) {
+	if (error.indexOf(errormessage) === -1) {
+		error.push(errormessage);
+	}
+}
+
 function checkEventName () {
 	var field = document.querySelector('#event-name').value;
+	var errorMessage = 'eventname';
 	if (field.length >= 3 && isNaN(field) === true) {
 		eventName.tooltip('hide');
+		removeError(errorMessage);
 	} else {
 		eventName.tooltip('show');
+		addError(errorMessage);
+		
 	}
 }
 function checkEventHost () {
 	var field = document.querySelector('#event-host').value;
+	var errorMessage = 'eventhost';
 	if (field.length >= 3 && isNaN(field) === true) {
 		eventHost.tooltip('hide');
+		removeError(errorMessage);
 	} else {
 		eventHost.tooltip('show');
+		addError(errorMessage);
 	}
 }
 //check that the start date is in the future
 function checkDate () {
 	var startField = document.querySelector('#event-start').value;
+	var errorMessage = 'date1';
 	var startDate  = new Date(startField);
 	var localTime = startDate.getTimezoneOffset() * 60000;
 	var startDate = Date.parse(startDate) + localTime;
 	var now = Date.now();
 	if(now >= startDate) {
 		eventStart.tooltip('show');
+		addError(errorMessage);
 	} else {
 		eventStart.tooltip('hide');
+		removeError(errorMessage);
 	}
 }
 //Compare the end and start dates to confirm the end date is after the start date
 function compareDates () {
 	var startDate = new Date(document.querySelector('#event-start').value);
+	var errorMessage = 'date2';
 	var endDate = new Date(document.querySelector('#event-end').value);
 		if (startDate >= endDate) {
 			eventEnd.tooltip('show');
+			addError(errorMessage);
 		} else {
 			eventEnd.tooltip('hide');
+			removeError(errorMessage);
 		}
+}
+
+function checkGuests () {
+	var field = document.querySelector('#event-guest').value;
+	var errorMessage = 'eventguests';
+	if (field.length >= 3 && isNaN(field) === true) {
+		eventGuest.tooltip('hide');
+		removeError(errorMessage);
+	} else {
+		eventGuest.tooltip('show');
+		addError(errorMessage);
+	}
+}
+function initAutocomplete() {
+	autocomplete = new google.maps.places.Autocomplete(
+	    /** @type {!HTMLInputElement} */(document.getElementById('event-location')),
+	    {types: ['geocode']});
+}
+function geolocate() {
+	if (navigator.geolocation) {
+	  navigator.geolocation.getCurrentPosition(function(position) {
+	    var geolocation = {
+	      lat: position.coords.latitude,
+	      lng: position.coords.longitude
+	    };
+	    var circle = new google.maps.Circle({
+	      center: geolocation,
+	      radius: position.coords.accuracy
+	    });
+	    autocomplete.setBounds(circle.getBounds());
+	  });
+	}
+}
+//event not able to be created without the requirements - if there are any errors in the array
+ function createMeeting() {
+	if (error.length !=0 ) {
+		return false;
+	}
 }
 //Tooltips section - initialize tool tips
 $(function () {
@@ -323,6 +391,10 @@ eventEnd.tooltip({
 	title: afterStart,
 	effect: 'toggle'
 });
+eventGuest.tooltip({
+	title: needsValue,
+	effect: 'toggle'
+});
 //Stop tooltips from showing on modal close
 signUp.on('hidden.bs.modal', function () {
     $('[data-toggle="tooltip"]').tooltip('hide');
@@ -337,3 +409,32 @@ createEvent.on('show.bs.modal', function () {
     $('[data-toggle="tooltip"]').tooltip('show');
 })
 // Progress Bar Here
+
+//Firebase Code
+
+//const userEmail = document.getElementById('email-address');
+//const userPassword = document.getElementById('password');
+//const createAccount = document.getElementById('submit-account');
+
+//authentication
+const authenticate = firebase.auth();
+
+createUser.addEventListener("click", function() {
+	var email = userEmail.value;
+	var pass = userPassword.value;
+	const promise = authenticate.createUserWithEmailAndPassword (email,pass);
+	// promise.then(function() {
+	// 	console.log('logged in');
+	// });
+	// promise.catch(function() {
+	// 	console.log('error on the create account');
+	// });
+});
+
+firebase.auth().onAuthStateChanged (function(user) {
+	if (user) {
+		console.log(user);
+	} else {
+		console.log('user not logged in');
+	}
+});

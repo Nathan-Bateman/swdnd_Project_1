@@ -38,18 +38,18 @@ gulp.task('uglifyscripts', function(){
 //////
 //BROWSER-SYNC
 ////////////////
-gulp.task('watch', ['sass'], function() {
+// gulp.task('watch', ['sass'], function() {
 
-    // browserSync.init({
-    //     server: "./"
-    // });
-    gulp.watch('js/**/*.js', ['concatscripts']);
-    // gulp.watch('js/**/*final.js', ['uglifyscripts']);
-	gulp.watch('scss/**/*.scss',['sass']);
-	gulp.watch('css/**/*.css', ['concatcss']);
-	gulp.watch('css/**/*.css', ['minifycss']);
-    // gulp.watch("*.html").on('change', browserSync.reload);
-});
+//     // browserSync.init({
+//     //     server: "./"
+//     // });
+//     gulp.watch('js/**/*.js', ['concatscripts']);
+//     // gulp.watch('js/**/*final.js', ['uglifyscripts']);
+// 	gulp.watch('scss/**/*.scss',['sass']);
+// 	gulp.watch('css/**/*.css', ['concatcss']);
+// 	gulp.watch('css/**/*.css', ['minifycss']);
+//     // gulp.watch("*.html").on('change', browserSync.reload);
+// });
 
 /////
 //Minify Task
@@ -64,18 +64,33 @@ gulp.task('minifycss', function() {
 /////
 //Sass Compile Task
 /////////////
+// gulp.task('sass', function () { 
+// 	gulp.src(['scss/**/*.scss'])
+// 		.pipe(plumber())
+// 		.pipe(sass())
+// 		.pipe(autoPrefixer({
+// 			browsers: ['last 2 versions']
+// 		}))
+// 		.pipe(gulp.dest('./css'))
+// 		.pipe(browserSync.stream());
+		
+
+// });
+
+
+/////
+//Sass Compile Task
+/////////////
 gulp.task('sass', function () { 
 	gulp.src(['scss/**/*.scss'])
 		.pipe(plumber())
 		.pipe(sass())
-		.pipe(autoPrefixer({
-			browsers: ['last 2 versions']
-		}))
-		.pipe(gulp.dest('./css'))
-		.pipe(browserSync.stream());
-		
+		.pipe(gulp.dest('./css'));
 
 });
+/////
+
+
 /////
 //Concat Styles Task
 /////////////
@@ -121,14 +136,15 @@ gulp.task('minifyhtml', function() {
 ////////////////
 //////
 
-// gulp.task('watch', function(){
-// 	gulp.watch('js/**/*.js', ['concatscripts']);
-// 	gulp.watch('scss/**/*.scss',['sass']);
-// 	gulp.watch('css/**/*.css', ['concatcss']);
-// 	gulp.watch('css/**/*.css', ['minifycss']);
 
-// });
+gulp.task('watch', function(){
+	gulp.watch('js/**/*.js', ['concatscripts']);
+	gulp.watch('js/**/*final.js', ['uglifyscripts']);
+	gulp.watch('scss/**/*.scss',['sass']);
+	gulp.watch('css/**/*.css', ['concatcss']);
+	gulp.watch('css/**/*.css', ['minifycss']);
 
+});
 
 //Default Task
 ////////////////
