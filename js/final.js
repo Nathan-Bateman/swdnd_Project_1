@@ -134,6 +134,38 @@ var status = document.querySelector('#status');
 const userEmail = document.getElementById('email-address');
 const userPassword = document.getElementById('password');
 const createUser = document.getElementById('submit-account');
+const signOut = document.getElementById('log-out');
+//
+$( document ).ready(function() {
+  //authentication
+	const authenticate = firebase.auth();
+
+	firebase.auth().onAuthStateChanged (function(user) {
+		if (user) {
+			console.log(user.displayName);
+			document.querySelector('#status').innerHTML= 'Welcome ' + user.email;
+			$('#log-out').removeClass('hide');
+
+		} else {
+			console.log('user not logged in');
+			document.querySelector('#status').innerHTML= 'Sign In';
+			$('#log-out').addClass('hide');
+		}
+	});
+  //Create an account - Firebase
+	createUser.addEventListener("click", function() {
+		var email = userEmail.value;
+		var pass = userPassword.value;
+		const promise = authenticate.createUserWithEmailAndPassword (email,pass);
+	});
+  //Sign out
+	signOut.addEventListener('click', function () {
+		authenticate.signOut();
+	});
+
+});
+
+
 //sign up fields
 var emailField = $('#email-address');
 var nameField = $('#name');
@@ -241,9 +273,12 @@ function checkMatch (p1, p2) {
 //TODO: make status ID retain name value after submission and make sign up button disappear
 function createAccount() {
 	if (passWord.value === passWordConfirm.value && $('#password-errors').children().length === 0 && document.querySelector('#name').value.length >= 3 ) {
-		document.querySelector('#status').innerHTML= 'nameField';
+		document.querySelector('#status').innerHTML= 'Welcome ' + nameField.val() + '!';
+		$('#signUp').modal('hide');
 	} else {
 		return false;
+
+		
 	}
 }
 //Create Event Validation
@@ -416,25 +451,4 @@ createEvent.on('show.bs.modal', function () {
 //const userPassword = document.getElementById('password');
 //const createAccount = document.getElementById('submit-account');
 
-//authentication
-const authenticate = firebase.auth();
 
-createUser.addEventListener("click", function() {
-	var email = userEmail.value;
-	var pass = userPassword.value;
-	const promise = authenticate.createUserWithEmailAndPassword (email,pass);
-	// promise.then(function() {
-	// 	console.log('logged in');
-	// });
-	// promise.catch(function() {
-	// 	console.log('error on the create account');
-	// });
-});
-
-firebase.auth().onAuthStateChanged (function(user) {
-	if (user) {
-		console.log(user);
-	} else {
-		console.log('user not logged in');
-	}
-});

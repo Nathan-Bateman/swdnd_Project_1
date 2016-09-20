@@ -41,6 +41,12 @@ p {
 .pac-container {
   z-index: 1051 !important; }
 
+#state-change {
+  display: inline-block; }
+
+.hide {
+  display: none; }
+
 /*Colors*/
 /*Font*/
 
