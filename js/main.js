@@ -1,9 +1,13 @@
 //login status
 var status = document.querySelector('#status');
+
+const existingEmail = document.getElementById('email-address-existing');
+const existingPassword = document.getElementById('password-existing');
 const userEmail = document.getElementById('email-address');
 const userPassword = document.getElementById('password');
 const createUser = document.getElementById('submit-account');
 const signOut = document.getElementById('log-out');
+const signIn = document.getElementById('log-in');
 //
 $( document ).ready(function() {
   //authentication
@@ -21,6 +25,24 @@ $( document ).ready(function() {
 			$('#log-out').addClass('hide');
 		}
 	});
+  //Sign in
+  signIn.addEventListener('click', function () {
+  	var email = existingEmail.value;
+  	var pass = existingPassword.value;
+  	const promise = authenticate.signInWithEmailAndPassword(email,pass);
+  	//promise.catch(e => console.log(e.message));
+  	if (promise.catch) {
+  		$('#error-space').removeClass('hide');
+  	} else if(promise.resolve) {
+  		$('#signIn').modal('hide');
+
+  	}
+  	// promise.catch(function(e) {
+  	// 	console.log(e.message);
+  	// 	document.getElementById('error-space').innerHTML = '<p>'+ e.message +'</p>';
+  	// });
+
+  });
   //Create an account - Firebase
 	createUser.addEventListener("click", function() {
 		var email = userEmail.value;
@@ -30,6 +52,13 @@ $( document ).ready(function() {
   //Sign out
 	signOut.addEventListener('click', function () {
 		authenticate.signOut();
+	});
+	/////
+	//beginning the section for validating the sign up existing user interface
+	//////
+	document.getElementById('create-account-signin').addEventListener('click', function () {
+		 $('#signIn').modal('hide');
+		 $('#signUp').modal('show');
 	});
 
 });
@@ -69,6 +98,9 @@ var tooFew = '<li id="numchar">need a least 8 characters</li>';
 var needsValue = 'This field is required and must have 3 or more alphabetical characters.';
 var future = 'Date must be in the future';
 var afterStart = 'Date must be after the start date';
+/////
+//beginning the section for validating the create account interface
+//////
 
 //validate the name field - sign up
 var error = [];
@@ -150,6 +182,9 @@ function createAccount() {
 		
 	}
 }
+/////
+//beginning the section for validating the create event interface
+//////
 //Create Event Validation
 function removeError (errormessage) {
 	var index = error.indexOf(errormessage);
@@ -255,6 +290,9 @@ function geolocate() {
 		return false;
 	}
 }
+/////
+//beginning the section for setting up the tooltips
+//////
 //Tooltips section - initialize tool tips
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
@@ -312,12 +350,7 @@ createEvent.on('hidden.bs.modal', function () {
 createEvent.on('show.bs.modal', function () {
     $('[data-toggle="tooltip"]').tooltip('show');
 })
-// Progress Bar Here
 
-//Firebase Code
 
-//const userEmail = document.getElementById('email-address');
-//const userPassword = document.getElementById('password');
-//const createAccount = document.getElementById('submit-account');
 
 

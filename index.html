@@ -20,7 +20,7 @@
     		</div>
         <div class='col-sm-4 header'>
           <ul id='state-change'>
-            <li id='status'>Sign In</li>
+            <li id='status' data-toggle="modal" data-target="#signIn" data-toggle="modal">Sign In</li>
             <li id='log-out'>Log out</li>
           </ul>
         </div>
@@ -146,6 +146,46 @@
   </div>
 </div>
 <!-- end signUp modal -->
+<div class="modal fade" id="signIn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+      </div>
+      <div class="modal-body">
+        <form action="index.html">
+        <label>Email
+            <input id='email-address-existing' data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='.form-control' type="email" required placeholder="Email" autocomplete='street-address' onchange="checkEmail()">
+        </label>
+        <label>Password
+            <input id='password-existing' type="password" data-toggle="tooltip" data-trigger='manual' data-animation='true'data-placement="left" required placeholder="Password" autocomplete='password' onfocus='countFocus()'onkeyup="checkPassword()">
+        </label>
+        <button id='log-in' type="button" onclick="return createAccount()">Sign In</button>
+        
+      </form>
+      
+      <div id='error-space' class="modal-footer hide">
+        <div class='row'>
+          <div class='col-sm-12'>
+          Incorrect email and/or password
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col-sm-12'>
+            <p>No Account?</p>
+            <button id='create-account-signin' class='btn btn-link' type='button'>Create Account</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end signIn modal -->
+
 </body>
 <script src="https://www.gstatic.com/firebasejs/3.2.1/firebase.js"></script>
 <script>
