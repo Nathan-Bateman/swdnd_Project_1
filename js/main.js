@@ -18,11 +18,13 @@ $( document ).ready(function() {
 			console.log(user.displayName);
 			document.querySelector('#status').innerHTML= 'Welcome ' + user.email;
 			$('#log-out').removeClass('hide');
+			$('#sign-up').addClass('hide');
 
 		} else {
 			console.log('user not logged in');
 			document.querySelector('#status').innerHTML= 'Sign In';
 			$('#log-out').addClass('hide');
+			$('#sign-up').removeClass('hide');
 		}
 	});
   //Sign in
@@ -30,24 +32,27 @@ $( document ).ready(function() {
   	var email = existingEmail.value;
   	var pass = existingPassword.value;
   	const promise = authenticate.signInWithEmailAndPassword(email,pass);
-  	//promise.catch(e => console.log(e.message));
-  	if (promise.catch) {
-  		$('#error-space').removeClass('hide');
-  	} else if(promise.resolve) {
-  		$('#signIn').modal('hide');
 
-  	}
-  	// promise.catch(function(e) {
-  	// 	console.log(e.message);
-  	// 	document.getElementById('error-space').innerHTML = '<p>'+ e.message +'</p>';
-  	// });
+  	promise.then(function(user) {
+  		console.log(user);
+  		$('#signIn').modal('hide');
+  		
+  	})
+  	promise.catch(function(e) {
+  		console.log(e.message);
+  		$('#error-space').removeClass('hide');
+  		document.querySelector('.custom-error').innerHTML = '<p>'+ e.message +'</p>';
+  	});
 
   });
   //Create an account - Firebase
-	createUser.addEventListener("click", function() {
+	createUser.addEventListener("click", function(event) {
 		var email = userEmail.value;
 		var pass = userPassword.value;
-		const promise = authenticate.createUserWithEmailAndPassword (email,pass);
+		// const promise = authenticate.createUserWithEmailAndPassword (email,pass);
+		// promise.catch(function(e) {
+		// 	event.preventDefault();
+		// });
 	});
   //Sign out
 	signOut.addEventListener('click', function () {
