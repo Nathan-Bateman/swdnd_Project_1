@@ -1,6 +1,6 @@
-//login status
+//login status and constants for authentication
 var status = document.querySelector('#status');
-
+var emailExistDataBase = false;
 const existingEmail = document.getElementById('email-address-existing');
 const existingPassword = document.getElementById('password-existing');
 const userEmail = document.getElementById('email-address');
@@ -10,7 +10,7 @@ const signOut = document.getElementById('log-out');
 const signIn = document.getElementById('log-in');
 //
 $( document ).ready(function() {
-  //authentication
+//authentication
 	const authenticate = firebase.auth();
 
 	firebase.auth().onAuthStateChanged (function(user) {
@@ -19,6 +19,7 @@ $( document ).ready(function() {
 			document.querySelector('#status').innerHTML= 'Welcome ' + user.email;
 			$('#log-out').removeClass('hide');
 			$('#sign-up').addClass('hide');
+			document.getElementById('submit-event').disabled = false;
 
 		} else {
 			console.log('user not logged in');
@@ -28,39 +29,53 @@ $( document ).ready(function() {
 		}
 	});
   //Sign in
-  signIn.addEventListener('click', function () {
-  	var email = existingEmail.value;
-  	var pass = existingPassword.value;
-  	const promise = authenticate.signInWithEmailAndPassword(email,pass);
+	  signIn.addEventListener('click', function () {
+	  	var email = existingEmail.value;
+	  	var pass = existingPassword.value;
+	  	const promise = authenticate.signInWithEmailAndPassword(email,pass);
 
-  	promise.then(function(user) {
-  		console.log(user);
-  		$('#signIn').modal('hide');
-  		
-  	})
-  	promise.catch(function(e) {
-  		console.log(e.message);
-  		$('#error-space').removeClass('hide');
-  		document.querySelector('.custom-error').innerHTML = '<p>'+ e.message +'</p>';
-  	});
+	  	promise.then(function(user) {
+	  		console.log(user);
+	  		$('#signIn').modal('hide');
+	  		
+	  	})
+	  	promise.catch(function(e) {
+	  		console.log(e.message);
+	  		$('#error-space').removeClass('hide');
+	  		document.querySelector('.custom-error').innerHTML = '<p>'+ e.message +'</p>';
+	  	});
 
-  });
-  //Create an account - Firebase
+	  });
+ //Create an account - Firebase
 	createUser.addEventListener("click", function(event) {
 		var email = userEmail.value;
 		var pass = userPassword.value;
-		// const promise = authenticate.createUserWithEmailAndPassword (email,pass);
-		// promise.catch(function(e) {
-		// 	event.preventDefault();
-		// });
+		if (passWord.value === passWordConfirm.value && $('#password-errors').children().length === 0 && document.querySelector('#name').value.length >= 3 ) {
+				//get the promise then hide the UI if there is not errors or else show the error if there is
+				 const promise = authenticate.createUserWithEmailAndPassword (email,pass);
+				 promise.then(function(user){
+					$('#signUp').modal('hide');
+				 });
+				 promise.catch(function(e) {
+				 	document.getElementById('create-account-custom-error').innerHTML = '<p>'+ e.message +'</p>';
+				 });
+		}else {
+				//check the fields to show their errors that must be corrected
+				checkName();
+				checkEmail();
+				checkPassword();
+				checkMatch();
+				///use this to show errors for individual fields	
+		}
 	});
   //Sign out
 	signOut.addEventListener('click', function () {
 		authenticate.signOut();
+		document.getElementById('submit-event').disabled = true;
 	});
-	/////
-	//beginning the section for validating the sign up existing user interface
-	//////
+  /////
+  //beginning the section for validating the sign up existing user interface
+  //////
 	document.getElementById('create-account-signin').addEventListener('click', function () {
 		 $('#signIn').modal('hide');
 		 $('#signUp').modal('show');
@@ -68,6 +83,71 @@ $( document ).ready(function() {
 
 });
 
+/////
+//beginning the section for writing events to firebase DB
+//////
+
+const database = firebase.database().ref().child('events');
+database.on('value',function(snap){
+	
+	var events = snap.val();
+	var array = [];
+	//document.getElementById('object').innerTEXT = JSON.stringify(snap.val(), null, 3);
+	//console.log(events.i);
+	for(var i in events) {
+		 var event = events[i];
+			 var eventName = event.name;
+			 var start = event.start;
+			 var end = event.end;
+			 var eventType = event.eventtype;
+			 var host = event.host;
+			 var guests = event.guests;
+			 var location = events.location;
+			 var details = event.details;
+
+		var eventMarkup = "<div class='event-post'>" +
+	"<h5 class='event-title'>" + eventName  + "</h5>" +
+	"<h5 class='event-host'>" + host + "</h5>" +
+	"<h1 class='event-type'>" + eventType +  "</h1>" +
+	"<h2 class='event-location>'" + location + "</h2>" +
+	"<h4 class='start'>" + start  +"</h4>" +
+	"<h4 class='end'>" + end  + "</h4>" +
+	"<p class='details'>" + details  + "</p>" +
+	"<p class='guests'>" +   guests   + "</p>" +
+	"</div>"
+		$("#object").append(eventMarkup);
+	}
+});
+//write to database
+function writeNewPost(name, type, host, start, end, location, guests, details) {
+  var user = firebase.auth().currentUser.uid;
+  console.log(user);
+  // A post entry.
+  var postData = {
+    name: name,
+    eventtype: type,
+    host: host,
+    start: start,
+    end: end,
+    location: location,
+    guests: guests,
+    details: details,
+    user: user
+  };
+//console.log(user);
+  // Get a key for a new Post.
+  var newPostKey = firebase.database().ref().child('events').push().key;
+
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  var updates = {};
+  updates['/events/' + newPostKey] = postData;
+  //updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+  return firebase.database().ref().update(updates);
+}
+/////
+//beginning the section for validating the create account interface
+//////
 
 //sign up fields
 var emailField = $('#email-address');
@@ -103,9 +183,6 @@ var tooFew = '<li id="numchar">need a least 8 characters</li>';
 var needsValue = 'This field is required and must have 3 or more alphabetical characters.';
 var future = 'Date must be in the future';
 var afterStart = 'Date must be after the start date';
-/////
-//beginning the section for validating the create account interface
-//////
 
 //validate the name field - sign up
 var error = [];
@@ -179,12 +256,10 @@ function checkMatch (p1, p2) {
 //TODO: make status ID retain name value after submission and make sign up button disappear
 function createAccount() {
 	if (passWord.value === passWordConfirm.value && $('#password-errors').children().length === 0 && document.querySelector('#name').value.length >= 3 ) {
-		document.querySelector('#status').innerHTML= 'Welcome ' + nameField.val() + '!';
-		$('#signUp').modal('hide');
+		// document.querySelector('#status').innerHTML= 'Welcome ' + nameField.val() + '!';
+		// $('#signUp').modal('hide');
 	} else {
-		return false;
-
-		
+		return false;	
 	}
 }
 /////
@@ -293,11 +368,14 @@ function geolocate() {
  function createMeeting() {
 	if (error.length !=0 ) {
 		return false;
+	} else {
+
 	}
 }
 /////
 //beginning the section for setting up the tooltips
 //////
+
 //Tooltips section - initialize tool tips
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()

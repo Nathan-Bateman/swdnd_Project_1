@@ -39,8 +39,9 @@
     <!-- End Summary Section -->
 <hr>
   	<div id='skills' class='row'>
-	      <div class='col-sm-12'>
-	        <h2>Events Go Here</h2>
+	      <div id='object' class='col-sm-12'>
+          
+	        <!-- <h2>Events Go Here</h2> -->
 	      </div>
   	</div>  
 <hr>
@@ -101,7 +102,7 @@
           <label>
             <textarea id="event-info" type="text" cols="20" rows="1" placeholder="Additional Information" maxlength="100"></textarea>
           </label>
-			    <input id="submit-event" type="submit" onclick="return createMeeting()">
+			    <input id="submit-event" type="submit" disabled value="Create Event" onclick="return createMeeting()">
   			</form>
       </div>
       <div class="modal-footer">
@@ -138,8 +139,8 @@
     		<label>Employer
       			<input id='employer' type="text" placeholder="Employer" autocomplete='password'>
     		</label>
-    		<button id='submit-account' type="button" onclick="return createAccount()">Create Account</button>
-
+    		<button id='submit-account' type="button">Create Account</button>
+          <span id='create-account-custom-error'></span>
   		</form>
       </div>
     </div>
