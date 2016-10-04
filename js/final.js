@@ -220,14 +220,48 @@ $( document ).ready(function() {
 
 const database = firebase.database().ref().child('events');
 database.on('value',function(snap){
-	
+	var user = firebase.auth().currentUser;
 	var events = snap.val();
-	var array = [];
-	//document.getElementById('object').innerTEXT = JSON.stringify(snap.val(), null, 3);
-	//console.log(events.i);
-	for(var i in events) {
-		 var event = events[i];
-			 var eventName = event.name;
+	if (user != null) {
+		var userID = firebase.auth().currentUser.uid;
+		for(var i in events) {
+			 var event = events[i];
+				 var eventName = event.name;
+				 var start = event.start;
+				 var end = event.end;
+				 var eventType = event.eventtype;
+				 var host = event.host;
+				 var guests = event.guests;
+				 var location = events.location;
+				 var details = event.details;
+				 var userIdPost = event.user;
+
+			if (userID === userIdPost) {
+				var eventMarkup = "<div class='event-post'>" +
+				"<h5 class='event-title'>" + eventName  + "</h5>" +
+				"<h5 class='event-host'>" + host + "</h5>" +
+				"<h1 class='event-type'>" + eventType +  "</h1>" +
+				"<h2 class='event-location>'" + location + "</h2>" +
+				"<h4 class='start'>" + start  +"</h4>" +
+				"<h4 class='end'>" + end  + "</h4>" +
+				"<p class='details'>" + details  + "</p>" +
+				"<p class='guests'>" +   guests   + "</p>" +
+				"</div>";
+				
+				$("#object").append(eventMarkup);
+			}
+		}
+	} else {
+//TODO: Break out of this look after the first three posts are posted to DOM
+		for (var i in events) {
+		  var count = 0
+		  count++;
+		  console.log(count);
+		  if (count === 3) {
+		  	break;
+		  }
+		  var event = events[i];
+		  	 var eventName = event.name;
 			 var start = event.start;
 			 var end = event.end;
 			 var eventType = event.eventtype;
@@ -235,46 +269,51 @@ database.on('value',function(snap){
 			 var guests = event.guests;
 			 var location = events.location;
 			 var details = event.details;
-
-		var eventMarkup = "<div class='event-post'>" +
-	"<h5 class='event-title'>" + eventName  + "</h5>" +
-	"<h5 class='event-host'>" + host + "</h5>" +
-	"<h1 class='event-type'>" + eventType +  "</h1>" +
-	"<h2 class='event-location>'" + location + "</h2>" +
-	"<h4 class='start'>" + start  +"</h4>" +
-	"<h4 class='end'>" + end  + "</h4>" +
-	"<p class='details'>" + details  + "</p>" +
-	"<p class='guests'>" +   guests   + "</p>" +
-	"</div>"
-		$("#object").append(eventMarkup);
+		  var eventMarkup = "<div class='event-post'>" +
+				"<h5 class='event-title'>" + eventName  + "</h5>" +
+				"<h5 class='event-host'>" + host + "</h5>" +
+				"<h1 class='event-type'>" + eventType +  "</h1>" +
+				"<h2 class='event-location>'" + location + "</h2>" +
+				"<h4 class='start'>" + start  +"</h4>" +
+				"<h4 class='end'>" + end  + "</h4>" +
+				"<p class='details'>" + details  + "</p>" +
+				"<p class='guests'>" +   guests   + "</p>" +
+				"</div>";
+				
+			$("#object").append(eventMarkup);
+			
+		}
 	}
+
 });
 //write to database
 function writeNewPost(name, type, host, start, end, location, guests, details) {
-  var user = firebase.auth().currentUser.uid;
-  console.log(user);
-  // A post entry.
-  var postData = {
-    name: name,
-    eventtype: type,
-    host: host,
-    start: start,
-    end: end,
-    location: location,
-    guests: guests,
-    details: details,
-    user: user
-  };
-//console.log(user);
-  // Get a key for a new Post.
-  var newPostKey = firebase.database().ref().child('events').push().key;
+	if (error.length !=0 ) {
+		return false;
+	} else {
+		  var user = firebase.auth().currentUser.uid;
+		  console.log(user);
+		  // A post entry.
+		  var postData = {
+		    name: name,
+		    eventtype: type,
+		    host: host,
+		    start: start,
+		    end: end,
+		    location: location,
+		    guests: guests,
+		    details: details,
+		    user: user
+		  };
+		//console.log(user);
+		  // Get a key for a new Post.
+		  var newPostKey = firebase.database().ref().child('events').push().key;
 
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  var updates = {};
-  updates['/events/' + newPostKey] = postData;
-  //updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-
-  return firebase.database().ref().update(updates);
+		  // Write the new post's data in the event list
+		  var updates = {};
+		  updates['/events/' + newPostKey] = postData;
+		  return firebase.database().ref().update(updates);
+		}
 }
 /////
 //beginning the section for validating the create account interface
