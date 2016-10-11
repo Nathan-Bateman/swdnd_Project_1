@@ -66,15 +66,15 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Create Event</h4>
+        <h4 class="modal-title" id="myModalLabel">Create Event</h4><span class='ce-li-rq'> - You must be logged in to create an event.</span>
       </div>
       <div class="modal-body">
           <form action="index.html">
 		    <label>
-			      <input id="event-name" type="text" placeholder="Event Name" maxlength="100" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" autofocus required onchange="checkEventName()">
+			      <input id="event-name" class='disabled' disabled type="text" placeholder="Event Name" maxlength="100" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" autofocus required onchange="checkEventName()">
 			    </label>
           <label>
-            <input id="event-type" list='eventnames' placeholder="Event type" required>
+            <input id="event-type" class='disabled' disabled list='eventnames' placeholder="Event type" required>
                   <datalist id="eventnames">
                     <option value="Lunch">
                     <option value="Dinner">
@@ -85,29 +85,29 @@
                   </datalist>
         </label>
           <label>
-            <input id="event-host" type="text" placeholder="Event host" maxlength="100"  data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" required onchange="checkEventHost()">
+            <input id="event-host" class='disabled' disabled type="text" placeholder="Event host" maxlength="100"  data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" required onchange="checkEventHost()">
           </label>
           <label>
-            <input id="event-start" type="datetime-local" placeholder="Start time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="checkDate()">
+            <input id="event-start" class='disabled' disabled type="datetime-local" placeholder="Start time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="checkDate()">
           </label>
           <label>
-            <input id="event-end" type="datetime-local" placeholder="End time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="compareDates()">
+            <input id="event-end" class='disabled' disabled type="datetime-local" placeholder="End time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="compareDates()">
           </label>
          <label>
-            <input id="event-location" type="text" placeholder="Event Location" maxlength="100" required onfocus="geolocate()">
+            <input id="event-location" class='disabled' disabled type="text" placeholder="Event Location" maxlength="100" required onfocus="geolocate()">
           </label>
           <label>
-            <textarea id="event-guest" type="text" cols="20" rows="1" data-toggle="tooltip" data-trigger='manual'data-animation='true' data-placement='top' maxlength="100" required onchange="checkGuests()" placeholder="Guest List"></textarea>
+            <textarea id="event-guest" class='disabled' disabled type="text" cols="20" rows="1" data-toggle="tooltip" data-trigger='manual'data-animation='true' data-placement='top' maxlength="100" required onchange="checkGuests()" placeholder="Guest List"></textarea>
           </label>
           <label>
-            <textarea id="event-info" type="text" cols="20" rows="1" placeholder="Additional Information" maxlength="100"></textarea>
+            <textarea id="event-info" class='disabled' disabled type="text" cols="20" rows="1" placeholder="Additional Information" maxlength="100"></textarea>
           </label>
-			    <input id="submit-event" type="submit" disabled value="Create Event" onclick="return writeNewPost(eventName.val(),eventType.val(),eventHost.val(),eventStart.val(),eventEnd.val(),eventLocation.val(),eventGuest.val(),eventInfo.val())">
+			    <input id="submit-event" class='disabled' type="submit" disabled value="Create Event" onclick="return writeNewPost(eventName.val(),eventType.val(),eventHost.val(),eventStart.val(),eventEnd.val(),eventLocation.val(),eventGuest.val(),eventInfo.val())">
   			</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>

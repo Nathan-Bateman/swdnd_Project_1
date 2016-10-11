@@ -139,6 +139,7 @@ const userPassword = document.getElementById('password');
 const createUser = document.getElementById('submit-account');
 const signOut = document.getElementById('log-out');
 const signIn = document.getElementById('log-in');
+const database = firebase.database().ref().child('events');
 //
 $( document ).ready(function() {
 //authentication
@@ -150,14 +151,81 @@ $( document ).ready(function() {
 			document.querySelector('#status').innerHTML= 'Welcome ' + user.email;
 			$('#log-out').removeClass('hide');
 			$('#sign-up').addClass('hide');
-			document.getElementById('submit-event').disabled = false;
+			$('.disabled').removeAttr( "disabled" );
+			$('.ce-li-rq').addClass('hide');
 
 		} else {
 			console.log('user not logged in');
 			document.querySelector('#status').innerHTML= 'Sign In';
 			$('#log-out').addClass('hide');
 			$('#sign-up').removeClass('hide');
+			$('.ce-li-rq').removeClass('hide');
 		}
+		database.on('value',function(snap){
+			var user = firebase.auth().currentUser;
+			var events = snap.val();
+			if (user != null) {
+				var userID = firebase.auth().currentUser.uid;
+				for(var i in events) {
+					 var event = events[i];
+						 var eventName = event.name;
+						 var start = event.start;
+						 var end = event.end;
+						 var eventType = event.eventtype;
+						 var host = event.host;
+						 var guests = event.guests;
+						 var location = events.location;
+						 var details = event.details;
+						 var userIdPost = event.user;
+
+					if (userID === userIdPost) {
+						var eventMarkup = "<div class='event-post'>" +
+						"<h5 class='event-title'>" + eventName  + "</h5>" +
+						"<h5 class='event-host'>" + host + "</h5>" +
+						"<h1 class='event-type'>" + eventType +  "</h1>" +
+						"<h2 class='event-location>'" + location + "</h2>" +
+						"<h4 class='start'>" + start  +"</h4>" +
+						"<h4 class='end'>" + end  + "</h4>" +
+						"<p class='details'>" + details  + "</p>" +
+						"<p class='guests'>" +   guests   + "</p>" +
+						"</div>";
+						
+						$("#object").append(eventMarkup);
+					}
+				}
+			} else {
+				var count = 0;
+				for (var i in events) {
+				  if (count <= 2) {
+				  	console.log(count);
+				  	var event = events[i];
+				  	 var eventName = event.name;
+					 var start = event.start;
+					 var end = event.end;
+					 var eventType = event.eventtype;
+					 var host = event.host;
+					 var guests = event.guests;
+					 var location = events.location;
+					 var details = event.details;
+				  var eventMarkup = "<div class='event-post'>" +
+						"<h5 class='event-title'>" + eventName  + "</h5>" +
+						"<h5 class='event-host'>" + host + "</h5>" +
+						"<h1 class='event-type'>" + eventType +  "</h1>" +
+						"<h2 class='event-location>'" + location + "</h2>" +
+						"<h4 class='start'>" + start  +"</h4>" +
+						"<h4 class='end'>" + end  + "</h4>" +
+						"<p class='details'>" + details  + "</p>" +
+						"<p class='guests'>" +   guests   + "</p>" +
+						"</div>";
+						
+					$("#object").append(eventMarkup);	
+					count++;
+				  }	
+					
+				}
+			}
+
+		});
 	});
   //Sign in
 	  signIn.addEventListener('click', function () {
@@ -202,7 +270,7 @@ $( document ).ready(function() {
   //Sign out
 	signOut.addEventListener('click', function () {
 		authenticate.signOut();
-		document.getElementById('submit-event').disabled = true;
+		$('.disabled').attr( "disabled" );
 	});
   /////
   //beginning the section for validating the sign up existing user interface
@@ -217,75 +285,72 @@ $( document ).ready(function() {
 /////
 //beginning the section for writing events to firebase DB
 //////
+// const database = firebase.database().ref().child('events');
+// database.on('value',function(snap){
+// 	var user = firebase.auth().currentUser;
+// 	var events = snap.val();
+// 	if (user != null) {
+// 		var userID = firebase.auth().currentUser.uid;
+// 		for(var i in events) {
+// 			 var event = events[i];
+// 				 var eventName = event.name;
+// 				 var start = event.start;
+// 				 var end = event.end;
+// 				 var eventType = event.eventtype;
+// 				 var host = event.host;
+// 				 var guests = event.guests;
+// 				 var location = events.location;
+// 				 var details = event.details;
+// 				 var userIdPost = event.user;
 
-const database = firebase.database().ref().child('events');
-database.on('value',function(snap){
-	var user = firebase.auth().currentUser;
-	var events = snap.val();
-	if (user != null) {
-		var userID = firebase.auth().currentUser.uid;
-		for(var i in events) {
-			 var event = events[i];
-				 var eventName = event.name;
-				 var start = event.start;
-				 var end = event.end;
-				 var eventType = event.eventtype;
-				 var host = event.host;
-				 var guests = event.guests;
-				 var location = events.location;
-				 var details = event.details;
-				 var userIdPost = event.user;
-
-			if (userID === userIdPost) {
-				var eventMarkup = "<div class='event-post'>" +
-				"<h5 class='event-title'>" + eventName  + "</h5>" +
-				"<h5 class='event-host'>" + host + "</h5>" +
-				"<h1 class='event-type'>" + eventType +  "</h1>" +
-				"<h2 class='event-location>'" + location + "</h2>" +
-				"<h4 class='start'>" + start  +"</h4>" +
-				"<h4 class='end'>" + end  + "</h4>" +
-				"<p class='details'>" + details  + "</p>" +
-				"<p class='guests'>" +   guests   + "</p>" +
-				"</div>";
+// 			if (userID === userIdPost) {
+// 				var eventMarkup = "<div class='event-post'>" +
+// 				"<h5 class='event-title'>" + eventName  + "</h5>" +
+// 				"<h5 class='event-host'>" + host + "</h5>" +
+// 				"<h1 class='event-type'>" + eventType +  "</h1>" +
+// 				"<h2 class='event-location>'" + location + "</h2>" +
+// 				"<h4 class='start'>" + start  +"</h4>" +
+// 				"<h4 class='end'>" + end  + "</h4>" +
+// 				"<p class='details'>" + details  + "</p>" +
+// 				"<p class='guests'>" +   guests   + "</p>" +
+// 				"</div>";
 				
-				$("#object").append(eventMarkup);
-			}
-		}
-	} else {
-//TODO: Break out of this look after the first three posts are posted to DOM
-		for (var i in events) {
-		  var count = 0
-		  count++;
-		  console.log(count);
-		  if (count === 3) {
-		  	break;
-		  }
-		  var event = events[i];
-		  	 var eventName = event.name;
-			 var start = event.start;
-			 var end = event.end;
-			 var eventType = event.eventtype;
-			 var host = event.host;
-			 var guests = event.guests;
-			 var location = events.location;
-			 var details = event.details;
-		  var eventMarkup = "<div class='event-post'>" +
-				"<h5 class='event-title'>" + eventName  + "</h5>" +
-				"<h5 class='event-host'>" + host + "</h5>" +
-				"<h1 class='event-type'>" + eventType +  "</h1>" +
-				"<h2 class='event-location>'" + location + "</h2>" +
-				"<h4 class='start'>" + start  +"</h4>" +
-				"<h4 class='end'>" + end  + "</h4>" +
-				"<p class='details'>" + details  + "</p>" +
-				"<p class='guests'>" +   guests   + "</p>" +
-				"</div>";
+// 				$("#object").append(eventMarkup);
+// 			}
+// 		}
+// 	} else {
+// 		var count = 0;
+// 		for (var i in events) {
+// 		  if (count <= 2) {
+// 		  	console.log(count);
+// 		  	var event = events[i];
+// 		  	 var eventName = event.name;
+// 			 var start = event.start;
+// 			 var end = event.end;
+// 			 var eventType = event.eventtype;
+// 			 var host = event.host;
+// 			 var guests = event.guests;
+// 			 var location = events.location;
+// 			 var details = event.details;
+// 		  var eventMarkup = "<div class='event-post'>" +
+// 				"<h5 class='event-title'>" + eventName  + "</h5>" +
+// 				"<h5 class='event-host'>" + host + "</h5>" +
+// 				"<h1 class='event-type'>" + eventType +  "</h1>" +
+// 				"<h2 class='event-location>'" + location + "</h2>" +
+// 				"<h4 class='start'>" + start  +"</h4>" +
+// 				"<h4 class='end'>" + end  + "</h4>" +
+// 				"<p class='details'>" + details  + "</p>" +
+// 				"<p class='guests'>" +   guests   + "</p>" +
+// 				"</div>";
 				
-			$("#object").append(eventMarkup);
+// 			$("#object").append(eventMarkup);	
+// 			count++;
+// 		  }	
 			
-		}
-	}
+// 		}
+// 	}
 
-});
+// });
 //write to database
 function writeNewPost(name, type, host, start, end, location, guests, details) {
 	if (error.length !=0 ) {
