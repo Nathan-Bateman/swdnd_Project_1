@@ -1,2 +1,9 @@
 /*Colors*/
 /*Font*/
+@media (min-width: 305px) {
+  #CAT-section {
+    text-align: center; }
+    #CAT-section button:first-child {
+      margin-right: 5px; }
+    #CAT-section button:last-child {
+      margin-left: 5px; } }

@@ -1,2 +1,21 @@
 /*Colors*/
 /*Font*/
+@media only screen and (min-width: 544px) {
+  #big-wrap-head {
+    margin: 0,0; }
+    #big-wrap-head .header {
+      text-align: center; }
+    #big-wrap-head .header:first-child {
+      padding-top: 12px;
+      text-align: left; }
+    #big-wrap-head .header:last-child {
+      padding-bottom: 10px;
+      text-align: right; }
+    #big-wrap-head #state-change {
+      margin-top: 10px; }
+      #big-wrap-head #state-change li:first-child {
+        float: right;
+        padding-right: 0; }
+      #big-wrap-head #state-change li:last-child {
+        float: right;
+        clear: right; } }

@@ -1,5 +1,32 @@
 @import "variables";
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 544px) {
+
+#big-wrap-head {
+	margin: 0,0;
+	.header {
+		text-align: center;
+	}
+	.header:first-child {
+		padding-top:12px;
+		text-align: left;
+	}
+	.header:last-child {
+		padding-bottom:10px;
+		text-align: right;
+	}
+	#state-change {
+    	margin-top: 10px;
+
+    	li:first-child {
+			float:right;
+			padding-right:0;
+    	}
+    	li:last-child {
+    		float:right;
+    		clear:right;
+    	}
+	}
+}
 
 		 
 }

@@ -1,4 +1,18 @@
 @import "variables";
+@media (min-width:305px) {
+
+#CAT-section {
+	text-align: center;
+	button:first-child {
+		margin-right:5px;
+	}
+	button:last-child {
+		margin-left:5px;
+		
+	}
+}
+
+}
 @media (min-width: 320px) {
 	
 	
