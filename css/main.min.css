@@ -1192,6 +1192,9 @@ p{font-size:16px;font-family:lato,sans-serif;font-weight:300}
 #big-wrap-head #state-change li:first-child{padding-right:5px}
 #CAT-section{text-align:center}
 #CAT-section button:first-child,#CAT-section button:last-child{margin-bottom:10px}
+.event-post{border:1px solid grey;padding:10px;margin:0 5px 20px;text-align:center}
+.event-post .title-host-wrap{display:flex;justify-content:space-between}
+.event-post .start-end-wrap{display:flex;justify-content:space-around}
 #footer{margin:0 auto;text-align:center;background-color:#FF530D;color:#fff;padding-top:10px;padding-bottom:10px}
 #footer a{color:#fff}
 @media (min-width:305px){#CAT-section{text-align:center}

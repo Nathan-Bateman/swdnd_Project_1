@@ -85,7 +85,20 @@
 }
 
 /*Styles for the events*/
-
+.event-post{
+    border: 1px solid grey;
+    padding: 10px;
+    margin: 0 5px 20px 5px;
+    text-align: center;
+    .title-host-wrap {
+    	display: flex;
+    	justify-content: space-between;
+    }
+    .start-end-wrap {
+    	display: flex;
+    	justify-content: space-around;
+    }
+}
 
 
 

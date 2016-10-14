@@ -84,6 +84,18 @@ p {
     margin-bottom: 10px; }
 
 /*Styles for the events*/
+.event-post {
+  border: 1px solid grey;
+  padding: 10px;
+  margin: 0 5px 20px 5px;
+  text-align: center; }
+  .event-post .title-host-wrap {
+    display: flex;
+    justify-content: space-between; }
+  .event-post .start-end-wrap {
+    display: flex;
+    justify-content: space-around; }
+
 /*footer styles*/
 #footer {
   margin: 0 auto;

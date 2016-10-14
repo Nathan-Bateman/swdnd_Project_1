@@ -174,22 +174,31 @@ $( document ).ready(function() {
 						 var eventType = event.eventtype;
 						 var host = event.host;
 						 var guests = event.guests;
-						 var location = events.location;
+						 var location = event.location;
 						 var details = event.details;
 						 var userIdPost = event.user;
 
+						 // var countMarkup = 0;
 					if (userID === userIdPost) {
-						var eventMarkup = "<div class='event-post'>" +
-						"<h5 class='event-title'>" + eventName  + "</h5>" +
-						"<h5 class='event-host'>" + host + "</h5>" +
-						"<h1 class='event-type'>" + eventType +  "</h1>" +
-						"<h2 class='event-location>'" + location + "</h2>" +
-						"<h4 class='start'>" + start  +"</h4>" +
-						"<h4 class='end'>" + end  + "</h4>" +
-						"<p class='details'>" + details  + "</p>" +
-						"<p class='guests'>" +   guests   + "</p>" +
-						"</div>";
-						
+
+							var eventMarkup = "<div class='event-post col-sm-4'>" +
+											"<div class='title-host-wrap'>" +
+											"<h5 class='event-title'>" + eventName  + "</h5>" +
+											"<p class='event-host'>" + host + "</p>" +
+											"</div>" +
+											"<div class='type-location-wrap'>" +
+											"<h1 class='event-type'>" + eventType +  "</h1>" +
+											"<p class='event-location'>" + location + "</p>" +
+											"</div>" +
+											"<div class='start-end-wrap'>" +
+											"<h4 class='start'>" + start  +"</h4>" +
+											"<h4 class='end'>" + end  + "</h4>" +
+											"</div>" +
+											"<div class='details-guests-wrap'>" +
+											"<p class='details'>" + details  + "</p>" +
+											"<p class='guests'>" +   guests   + "</p>" +
+											"</div>" +
+											"</div>";
 						$("#object").append(eventMarkup);
 					}
 				}
@@ -668,7 +677,5 @@ createEvent.on('hidden.bs.modal', function () {
 createEvent.on('show.bs.modal', function () {
     $('[data-toggle="tooltip"]').tooltip('show');
 })
-
-
 
 
