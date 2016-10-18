@@ -35,6 +35,7 @@ $( document ).ready(function() {
 			var events = snap.val();
 			if (user != null) {
 				var userID = firebase.auth().currentUser.uid;
+				var countMarkup = 0;
 				for(var i in events) {
 					 var event = events[i];
 						 var eventName = event.name;
@@ -47,16 +48,14 @@ $( document ).ready(function() {
 						 var details = event.details;
 						 var userIdPost = event.user;
 
-						 // var countMarkup = 0;
 					if (userID === userIdPost) {
-
 							var eventMarkup = "<div class='event-post col-sm-4'>" +
 											"<div class='title-host-wrap'>" +
-											"<h5 class='event-title'>" + eventName  + "</h5>" +
-											"<p class='event-host'>" + host + "</p>" +
+											"<p class='event-title'>" + eventType  + "</p>" +
+											"<p class='event-host'><span>Host(s): </span>" + host + "</p>" +
 											"</div>" +
 											"<div class='type-location-wrap'>" +
-											"<h1 class='event-type'>" + eventType +  "</h1>" +
+											"<h1 class='event-type'>" + eventName +  "</h1>" +
 											"<p class='event-location'>" + location + "</p>" +
 											"</div>" +
 											"<div class='start-end-wrap'>" +
@@ -64,11 +63,12 @@ $( document ).ready(function() {
 											"<h4 class='end'>" + end  + "</h4>" +
 											"</div>" +
 											"<div class='details-guests-wrap'>" +
-											"<p class='details'>" + details  + "</p>" +
-											"<p class='guests'>" +   guests   + "</p>" +
+											"<p class='details'><span>Notes: </span>" + details  + "</p>" +
+											"<p class='guests'><span>Guestlist: </span>" +   guests   + "</p>" +
 											"</div>" +
 											"</div>";
-						$("#object").append(eventMarkup);
+						$("#events-firebase").append(eventMarkup);
+						countMarkup = countMarkup +1;
 					}
 				}
 			} else {
@@ -96,7 +96,7 @@ $( document ).ready(function() {
 						"<p class='guests'>" +   guests   + "</p>" +
 						"</div>";
 						
-					$("#object").append(eventMarkup);	
+					$("#events-firebase").append(eventMarkup);	
 					count++;
 				  }	
 					
@@ -193,7 +193,7 @@ $( document ).ready(function() {
 // 				"<p class='guests'>" +   guests   + "</p>" +
 // 				"</div>";
 				
-// 				$("#object").append(eventMarkup);
+// 				$("#events-firebase").append(eventMarkup);
 // 			}
 // 		}
 // 	} else {
@@ -221,7 +221,7 @@ $( document ).ready(function() {
 // 				"<p class='guests'>" +   guests   + "</p>" +
 // 				"</div>";
 				
-// 			$("#object").append(eventMarkup);	
+// 			$("#events-firebase").append(eventMarkup);	
 // 			count++;
 // 		  }	
 			

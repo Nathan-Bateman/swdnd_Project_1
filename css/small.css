@@ -46,7 +46,7 @@ p {
 
 /*header styles*/
 .header-wrapper {
-  background-color: #FF530D; }
+  background-color: #E13700; }
 
 #big-wrap-head {
   max-width: 1300px;
@@ -72,28 +72,48 @@ p {
 #CAT-section {
   text-align: center; }
   #CAT-section button:first-child {
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    background-color: #337CA0; }
   #CAT-section button:last-child {
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    background-color: #337CA0; }
 
 /*Styles for the events*/
+#events-firebase {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center; }
+
 .event-post {
+  min-width: 280px;
+  max-width: 330px;
   border: 1px solid grey;
-  padding: 10px;
+  padding: 0px;
   margin: 0 5px 20px 5px;
   text-align: center; }
   .event-post .title-host-wrap {
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    color: #fff;
+    background-color: #3ec300; }
+    .event-post .title-host-wrap p {
+      padding: 5px; }
+    .event-post .title-host-wrap .event-host span {
+      font-weight: 400; }
+  .event-post .type-location-wrap .event-location {
+    color: #337CA0; }
   .event-post .start-end-wrap {
     display: flex;
     justify-content: space-around; }
+  .event-post .details-guests-wrap span {
+    font-weight: 400; }
 
 /*footer styles*/
 #footer {
   margin: 0 auto;
   text-align: center;
-  background-color: #FF530D;
+  background-color: #E13700;
   color: #fff;
   padding-top: 10px;
   padding-bottom: 10px; }
