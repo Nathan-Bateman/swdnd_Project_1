@@ -111,32 +111,38 @@ p {
   .event-post .details-guests-wrap span {
     font-weight: 400; }
 
-/*Sign-Up Styles*/
-#signUp .modal-header {
+/*Form Styles*/
+.modal-header {
   background-color: #e13700;
   color: #fff; }
-  #signUp .modal-header button {
+  .modal-header button {
     background-color: #e13700;
     color: #fff; }
 
-#signUp .modal-body input {
+.modal-body input {
   margin-top: 40px; }
 
-#signUp .modal-body #name {
+.modal-body textarea {
+  margin-top: 40px; }
+
+.modal-body #name {
   margin-top: 30px; }
 
-#signUp .modal-body p {
+.modal-body p {
   font-size: 14px; }
-  #signUp .modal-body p span {
+  .modal-body p span {
     font-weight: 400; }
 
-#signUp .modal-body button {
+.modal-body button {
   background-color: #337ca0;
   color: #fff;
   border: none;
   padding: 10px 15px 10px 15px;
   margin-bottom: 10px; }
 
+/*Sign-Up Styles*/
+/*Create Event Styles*/
+/*Sign In Styles*/
 /*Tooltip styles*/
 .tooltip-inner {
   max-width: 300px !important;

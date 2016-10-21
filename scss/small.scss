@@ -133,39 +133,51 @@
     }
 
 }
-/*Sign-Up Styles*/
-#signUp {
-	.modal-header {
+/*Form Styles*/
+.modal-header {
+	background-color: #e13700;
+	color: #fff;
+	button {
 		background-color: #e13700;
-    	color: #fff;
-    	button {
-    		background-color: #e13700;
-    		color: #fff;
-    	}
-	}
-	.modal-body {
-		input {
-			margin-top: 40px;
-		}
-		#name {
-			margin-top: 30px;
-		}
-		p {
-			font-size: 14px;
-			span {
-				font-weight: 400;
-			}
-		}
-		button {
-			background-color: #337ca0;
-		    color: #fff;
-		    border: none;
-		    padding: 10px 15px 10px 15px;
-		    margin-bottom: 10px;
-		}
+		color: #fff;
 	}
 }
+.modal-body {
+	input {
+		margin-top: 40px;
+	}
+	textarea {
+		margin-top: 40px;
+	}
+	#name {
+		margin-top: 30px;
+	}
+	p {
+		font-size: 14px;
+		span {
+			font-weight: 400;
+		}
+	}
+	button {
+		background-color: #337ca0;
+	    color: #fff;
+	    border: none;
+	    padding: 10px 15px 10px 15px;
+	    margin-bottom: 10px;
+	}
+}
+/*Sign-Up Styles*/
+#signUp {
 
+}
+/*Create Event Styles*/
+#create-event {
+
+}
+/*Sign In Styles*/
+#signIn {
+
+}
 /*Tooltip styles*/
 .tooltip-inner {
 	max-width: 300px !important;

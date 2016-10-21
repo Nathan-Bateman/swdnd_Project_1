@@ -147,7 +147,6 @@ $( document ).ready(function() {
 
 	firebase.auth().onAuthStateChanged (function(user) {
 		if (user) {
-			console.log(user.displayName);
 			document.querySelector('#status').innerHTML= 'Welcome ' + user.email;
 			$('#log-out').removeClass('hide');
 			$('#sign-up').addClass('hide');
@@ -155,7 +154,6 @@ $( document ).ready(function() {
 			$('.ce-li-rq').addClass('hide');
 
 		} else {
-			console.log('user not logged in');
 			document.querySelector('#status').innerHTML= 'Sign In';
 			$('#log-out').addClass('hide');
 			$('#sign-up').removeClass('hide');
@@ -296,105 +294,47 @@ $( document ).ready(function() {
 		 $('#signIn').modal('hide');
 		 $('#signUp').modal('show');
 	});
-
 });
 
-/////
-//beginning the section for writing events to firebase DB
-//////
-// const database = firebase.database().ref().child('events');
-// database.on('value',function(snap){
-// 	var user = firebase.auth().currentUser;
-// 	var events = snap.val();
-// 	if (user != null) {
-// 		var userID = firebase.auth().currentUser.uid;
-// 		for(var i in events) {
-// 			 var event = events[i];
-// 				 var eventName = event.name;
-// 				 var start = event.start;
-// 				 var end = event.end;
-// 				 var eventType = event.eventtype;
-// 				 var host = event.host;
-// 				 var guests = event.guests;
-// 				 var location = events.location;
-// 				 var details = event.details;
-// 				 var userIdPost = event.user;
-
-// 			if (userID === userIdPost) {
-// 				var eventMarkup = "<div class='event-post'>" +
-// 				"<h5 class='event-title'>" + eventName  + "</h5>" +
-// 				"<h5 class='event-host'>" + host + "</h5>" +
-// 				"<h1 class='event-type'>" + eventType +  "</h1>" +
-// 				"<h2 class='event-location>'" + location + "</h2>" +
-// 				"<h4 class='start'>" + start  +"</h4>" +
-// 				"<h4 class='end'>" + end  + "</h4>" +
-// 				"<p class='details'>" + details  + "</p>" +
-// 				"<p class='guests'>" +   guests   + "</p>" +
-// 				"</div>";
-				
-// 				$("#events-firebase").append(eventMarkup);
-// 			}
-// 		}
-// 	} else {
-// 		var count = 0;
-// 		for (var i in events) {
-// 		  if (count <= 2) {
-// 		  	console.log(count);
-// 		  	var event = events[i];
-// 		  	 var eventName = event.name;
-// 			 var start = event.start;
-// 			 var end = event.end;
-// 			 var eventType = event.eventtype;
-// 			 var host = event.host;
-// 			 var guests = event.guests;
-// 			 var location = events.location;
-// 			 var details = event.details;
-// 		  var eventMarkup = "<div class='event-post'>" +
-// 				"<h5 class='event-title'>" + eventName  + "</h5>" +
-// 				"<h5 class='event-host'>" + host + "</h5>" +
-// 				"<h1 class='event-type'>" + eventType +  "</h1>" +
-// 				"<h2 class='event-location>'" + location + "</h2>" +
-// 				"<h4 class='start'>" + start  +"</h4>" +
-// 				"<h4 class='end'>" + end  + "</h4>" +
-// 				"<p class='details'>" + details  + "</p>" +
-// 				"<p class='guests'>" +   guests   + "</p>" +
-// 				"</div>";
-				
-// 			$("#events-firebase").append(eventMarkup);	
-// 			count++;
-// 		  }	
-			
-// 		}
-// 	}
+//write to database
+// submitEvent.addEventListener('click',function () {
 
 // });
-//write to database
 function writeNewPost(name, type, host, start, end, location, guests, details) {
-	if (error.length !=0 ) {
-		return false;
-	} else {
-		  var user = firebase.auth().currentUser.uid;
-		  console.log(user);
-		  // A post entry.
-		  var postData = {
-		    name: name,
-		    eventtype: type,
-		    host: host,
-		    start: start,
-		    end: end,
-		    location: location,
-		    guests: guests,
-		    details: details,
-		    user: user
-		  };
-		//console.log(user);
-		  // Get a key for a new Post.
-		  var newPostKey = firebase.database().ref().child('events').push().key;
+	// && eventName.val().length >= 3 && eventType.val().length >= 0 && eventHost.val().length >= 3 && eventStart.val().length > 0 && eventEnd.val().length > 0 && eventLocation.val().length > 0 && eventGuest.val().length > 0
+	
+	if (error.length === 0 && eventName.val().length >= 3 && eventType.val().length >= 0 && eventHost.val().length >= 3 && eventStart.val().length > 0 && eventEnd.val().length > 0 && eventLocation.val().length > 0 && eventGuest.val().length > 0) {
+	  var user = firebase.auth().currentUser.uid;
+	  console.log(user);
+	  // A post entry.
+	  var postData = {
+	    name: name,
+	    eventtype: type,
+	    host: host,
+	    start: start,
+	    end: end,
+	    location: location,
+	    guests: guests,
+	    details: details,
+	    user: user
+	  };
+	  // Get a key for a new Post.
+	  var newPostKey = firebase.database().ref().child('events').push().key;
 
-		  // Write the new post's data in the event list
-		  var updates = {};
-		  updates['/events/' + newPostKey] = postData;
-		  return firebase.database().ref().update(updates);
+	  // Write the new post's data in the event list
+	  var updates = {};
+	  updates['/events/' + newPostKey] = postData;
+	  return firebase.database().ref().update(updates);
+	  addError('value');
+	} else {
+			
+			checkEventName();
+			checkEventHost();
+			checkDate();
+			compareDates();
+			checkGuests();
+			return false;
+
 		}
 }
 /////
@@ -505,7 +445,6 @@ function checkMatch (p1, p2) {
 	}
 }
 //Test validation and create an account
-//TODO: make status ID retain name value after submission and make sign up button disappear
 function createAccount() {
 	if (passWord.value === passWordConfirm.value && $('#password-errors').children().length === 0 && document.querySelector('#name').value.length >= 3 ) {
 		// document.querySelector('#status').innerHTML= 'Welcome ' + nameField.val() + '!';
@@ -517,6 +456,7 @@ function createAccount() {
 /////
 //beginning the section for validating the create event interface
 //////
+
 //Create Event Validation
 function removeError (errormessage) {
 	var index = error.indexOf(errormessage);

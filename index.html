@@ -64,40 +64,42 @@
       </div>
       <div class="modal-body">
           <form action="index.html">
-		    <label>
-			      <input id="event-name" class='disabled' disabled type="text" placeholder="Event Name" maxlength="100" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" autofocus required onchange="checkEventName()">
-			    </label>
-          <label>
-            <input id="event-type" class='disabled' disabled list='eventnames' placeholder="Event type" required>
-                  <datalist id="eventnames">
-                    <option value="Lunch">
-                    <option value="Dinner">
-                    <option value="Breakfast">
-                    <option value="Prayer">
-                    <option value="Dove Shoot">
-                    <option value="Spouse Date">
-                  </datalist>
-        </label>
-          <label>
-            <input id="event-host" class='disabled' disabled type="text" placeholder="Event host" maxlength="100"  data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" required onchange="checkEventHost()">
-          </label>
-          <label>
-            <input id="event-start" class='disabled' disabled type="datetime-local" placeholder="Start time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="checkDate()">
-          </label>
-          <label>
-            <input id="event-end" class='disabled' disabled type="datetime-local" placeholder="End time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="compareDates()">
-          </label>
-         <label>
-            <input id="event-location" class='disabled' disabled type="text" placeholder="Event Location" maxlength="100" required onfocus="geolocate()">
-          </label>
-          <label>
-            <textarea id="event-guest" class='disabled' disabled type="text" cols="20" rows="1" data-toggle="tooltip" data-trigger='manual'data-animation='true' data-placement='top' maxlength="100" required onchange="checkGuests()" placeholder="Guest List"></textarea>
-          </label>
-          <label>
-            <textarea id="event-info" class='disabled' disabled type="text" cols="20" rows="1" placeholder="Additional Information" maxlength="100"></textarea>
-          </label>
-			    <input id="submit-event" class='disabled' type="submit" disabled value="Create Event" onclick="return writeNewPost(eventName.val(),eventType.val(),eventHost.val(),eventStart.val(),eventEnd.val(),eventLocation.val(),eventGuest.val(),eventInfo.val())">
-  			</form>
+            <div class='form-group'>
+		          <label class='col-form-label visuallyhidden'>Event Name </label>
+			           <input id="event-name" class='disabled form-control' disabled type="text" placeholder="Event Name" maxlength="100" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" autofocus required onchange="checkEventName()">
+			   
+              <label class='col-form-label visuallyhidden'>Event Type </label>
+                  <input id="event-type" class='disabled form-control' disabled list='eventnames' placeholder="Event type" required>
+                    <datalist id="eventnames">
+                      <option value="Lunch">
+                      <option value="Dinner">
+                      <option value="Breakfast">
+                      <option value="Prayer">
+                      <option value="Dove Shoot">
+                      <option value="Spouse Date">
+                    </datalist>
+        
+              <label class='col-form-label visuallyhidden'>Host </label>
+                  <input id="event-host" class='disabled form-control' disabled type="text" placeholder="Event host" maxlength="100"  data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" required onchange="checkEventHost()">
+          
+              <label class='col-form-label visuallyhidden'>Start Time </label>
+                  <input id="event-start" class='disabled form-control' disabled type="datetime-local" placeholder="Start time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="checkDate()">
+          
+              <label class='col-form-label visuallyhidden'>End Time </label>
+                  <input id="event-end" class='disabled form-control' disabled type="datetime-local" placeholder="End time" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement='top' maxlength="100" required onchange="compareDates()">
+          
+              <label class='col-form-label visuallyhidden'>Location </label>
+                  <input id="event-location" class='disabled form-control' disabled type="text" placeholder="Event Location" maxlength="100" required onfocus="geolocate()">
+          
+              <label class='col-form-label visuallyhidden'>Guest List </label>
+                  <textarea id="event-guest" class='disabled form-control' disabled type="text" cols="20" rows="1" data-toggle="tooltip" data-trigger='manual'data-animation='true' data-placement='top' maxlength="100" required onchange="checkGuests()" placeholder="Guest List"></textarea>
+          
+              <label class='col-form-label visuallyhidden'>Event Information </label>
+                  <textarea id="event-info" class='disabled form-control' disabled type="text" cols="20" rows="1" placeholder="Additional Information" maxlength="100"></textarea>
+            </div>
+			         <input id="submit-event" class='disabled' type="submit" disabled value="Create Event" onclick="return writeNewPost(eventName.val(),eventType.val(),eventHost.val(),eventStart.val(),eventEnd.val(),eventLocation.val(),eventGuest.val(),eventInfo.val())">
+               <!-- <button id='submit-event' class='disabled' type='button' disabled>Create Event</button> -->
+  			 </form>
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -120,25 +122,25 @@
         <form action="index.html">
           <div class='form-group'>
             <label class='col-form-label visuallyhidden'>Name</label>
-          <input data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='form-control' id="name" required type="text" placeholder="Name" autofocus onchange="checkName()">
+              <input data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='form-control' id="name" required type="text" placeholder="Name" autofocus onchange="checkName()">
 		   
     		
-    		<label class='col-form-label visuallyhidden'>Email</label>
-      			<input id='email-address' data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='form-control' type="email" required placeholder="Email" autocomplete='street-address' onchange="checkEmail()">
+    		    <label class='col-form-label visuallyhidden'>Email</label>
+      			   <input id='email-address' data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='form-control' type="email" required placeholder="Email" autocomplete='street-address' onchange="checkEmail()">
     		
-    		<label class='col-form-label visuallyhidden'>Password</label>
-      			<input id='password' type="password" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='form-control' required placeholder="Password" autocomplete='password' onfocus='countFocus()'onkeyup="checkPassword()">
-    		<p><span>Passwords Requirements:</span> Upper and lowercase letter, at least one number, at least one of the following: !,@,#,$,%,^,&,*, at least eight characters</p>
-    		<label class='col-form-label visuallyhidden'>Confirm Password</label>
-      			<input id='password-confirm' type="password" data-toggle="tooltip" data-trigger='manual' required placeholder="Confirm Password" autocomplete='password' class='form-control' onkeyup="checkMatch(passWord,passWordConfirm)">
+    		    <label class='col-form-label visuallyhidden'>Password</label>
+      			   <input id='password' type="password" data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='form-control' required placeholder="Password" autocomplete='password' onfocus='countFocus()'onkeyup="checkPassword()">
+    		        <p><span>Passwords Requirements:</span> Upper and lowercase letter, at least one number, at least one of the following: !,@,#,$,%,^,&,*, at least eight characters</p>
+    		    <label class='col-form-label visuallyhidden'>Confirm Password</label>
+      			   <input id='password-confirm' type="password" data-toggle="tooltip" data-trigger='manual' required placeholder="Confirm Password" autocomplete='password' class='form-control' onkeyup="checkMatch(passWord,passWordConfirm)">
     		
-    		<label class='col-form-label visuallyhidden'>Employer</label>
-      			<input id='employer' type="text" class='form-control' placeholder="Employer" autocomplete='password'>
+    		    <label class='col-form-label visuallyhidden'>Employer</label>
+      			   <input id='employer' type="text" class='form-control' placeholder="Employer" autocomplete='password'>
           </div>
     
-    		<button id='submit-account' type="button">Create Account</button>
-          <span id='create-account-custom-error'></span>
-  		</form>
+    		  <button id='submit-account' type="button">Create Account</button>
+            <span id='create-account-custom-error'></span>
+  		  </form>
       </div>
     </div>
   </div>
@@ -151,18 +153,19 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myModalLabel">Sign Up</h4>
+        <h4 class="modal-title" id="myModalLabel">Sign In</h4>
       </div>
       <div class="modal-body">
         <form action="index.html">
-        <label>Email
-            <input id='email-address-existing' data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='.form-control' type="email" required placeholder="Email" autocomplete='street-address' onchange="checkEmail()">
-        </label>
-        <label>Password
-            <input id='password-existing' type="password" data-toggle="tooltip" data-trigger='manual' data-animation='true'data-placement="left" required placeholder="Password" autocomplete='password' onfocus='countFocus()'onkeyup="checkPassword()">
-        </label>
-        <button id='log-in' type="button" onclick="return createAccount()">Sign In</button>
-        
+          <div class='form-group'>
+            <label class='col-form-label visuallyhidden'>Email</label>
+                <input id='email-address-existing' data-toggle="tooltip" data-trigger='manual' data-animation='true' data-placement="top" class='form-control' type="email" required placeholder="Email" autocomplete='street-address' onchange="checkEmail()">
+            
+            <label class='col-form-label visuallyhidden'>Password</label>
+                <input id='password-existing' type="password" data-toggle="tooltip" data-trigger='manual' class='form-control' data-animation='true'data-placement="left" required placeholder="Password" autocomplete='password' onfocus='countFocus()'onkeyup="checkPassword()">
+           </div>
+            <button id='log-in' type="button" onclick="return createAccount()">Sign In</button>
+          
       </form>
       
       <div id='error-space' class="modal-footer hide">
