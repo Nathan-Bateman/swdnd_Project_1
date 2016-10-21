@@ -427,12 +427,12 @@ var startWidth = 0;
 //error messages
 var passWordErrors = $('#password-errors');
 var missMatch = '<li>the passwords do not match</li>';
-var needSymbol = '<li id="symbols">needs on of these: !,@,#,$,%,^,&,*</li>';
-var needNumber = '<li id="number">needs a number</li>';
-var needLower = '<li id="lowercase">needs a lowercase letter</li>';
-var needUpper = '<li id="uppercase">need an uppercase letter</li>';
-var tooFew = '<li id="numchar">need a least 8 characters</li>';
-var needsValue = 'This field is required and must have 3 or more alphabetical characters.';
+var needSymbol = '<li id="symbols">$ </li>';
+var needNumber = '<li id="number"> | 0-9 </li>';
+var needLower = '<li id="lowercase"> | lc </li>';
+var needUpper = '<li id="uppercase"> | CAP </li>';
+var tooFew = '<li id="numchar"> | 8+ </li>';
+var needsValue = 'At least three alphabetical characters';
 var future = 'Date must be in the future';
 var afterStart = 'Date must be after the start date';
 

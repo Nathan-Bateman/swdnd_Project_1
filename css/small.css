@@ -31,6 +31,7 @@ p {
   font-family: "lato", sans-serif;
   font-weight: 300; }
 
+/*make google maps api appear infront of Modal*/
 .pac-container {
   z-index: 1051 !important; }
 
@@ -39,17 +40,6 @@ p {
 
 .hide {
   display: none; }
-
-/*hide the labels*/
-.visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px; }
 
 /*container padding removal*/
 #container {
@@ -80,6 +70,7 @@ p {
     #big-wrap-head #state-change li:first-child {
       padding-right: 5px; }
 
+/*Sign-Up and Create Event button styles*/
 #CAT-section {
   text-align: center; }
   #CAT-section button:first-child {
@@ -89,7 +80,7 @@ p {
     margin-bottom: 10px;
     background-color: #337CA0; }
 
-/*Styles for the events*/
+/*Styles for the events section*/
 #events-firebase {
   display: flex;
   flex-wrap: wrap;
@@ -119,6 +110,55 @@ p {
     justify-content: space-around; }
   .event-post .details-guests-wrap span {
     font-weight: 400; }
+
+/*Sign-Up Styles*/
+#signUp .modal-header {
+  background-color: #e13700;
+  color: #fff; }
+  #signUp .modal-header button {
+    background-color: #e13700;
+    color: #fff; }
+
+#signUp .modal-body input {
+  margin-top: 40px; }
+
+#signUp .modal-body #name {
+  margin-top: 30px; }
+
+#signUp .modal-body p {
+  font-size: 14px; }
+  #signUp .modal-body p span {
+    font-weight: 400; }
+
+#signUp .modal-body button {
+  background-color: #337ca0;
+  color: #fff;
+  border: none;
+  padding: 10px 15px 10px 15px;
+  margin-bottom: 10px; }
+
+/*Tooltip styles*/
+.tooltip-inner {
+  max-width: 300px !important;
+  list-style-type: none;
+  background-color: #fff;
+  color: #3ec300; }
+  .tooltip-inner #password-errors {
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    margin-bottom: -1px; }
+
+/*hide the labels*/
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
 
 /*footer styles*/
 #footer {
